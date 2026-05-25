@@ -173,12 +173,12 @@
 
     </a-entity>
 
-    <!-- ── CÁMARA ── -->
-    <a-entity id="rig" position="0 1.6 0">
+    <!-- ── CÁMARA + MANDOS (todo dentro del rig) ── -->
+    <a-entity id="rig" position="0 0 0">
       <a-camera
         look-controls="reverseMouseDrag: false; touchEnabled: true; magicWindowTrackingEnabled: true; pointerLockEnabled: false"
         wasd-controls-enabled="false"
-        position="0 0 0"
+        position="0 1.6 0"
       >
         <!-- Cursor para VR (controles de cabeza/mando). En desktop, los clicks se manejan con raycast manual desde JS -->
         <a-entity
@@ -198,20 +198,20 @@
           visible="false"
         ></a-sphere>
       </a-camera>
+
+      <!-- ── Controles de Meta Quest dentro del rig (heredan posición correcta) ── -->
+      <a-entity
+        id="leftHand"
+        laser-controls="hand: left"
+        raycaster="objects: .clickable; far: 25; lineColor: #E0136C; lineOpacity: 0.7"
+      ></a-entity>
+
+      <a-entity
+        id="rightHand"
+        laser-controls="hand: right"
+        raycaster="objects: .clickable; far: 25; lineColor: #F24D95; lineOpacity: 0.8"
+      ></a-entity>
     </a-entity>
-
-    <!-- ── Controles de Meta Quest (mandos derecho e izquierdo) ── -->
-    <a-entity
-      id="leftHand"
-      laser-controls="hand: left"
-      raycaster="objects: .clickable; far: 25; lineColor: #E0136C; lineOpacity: 0.7"
-    ></a-entity>
-
-    <a-entity
-      id="rightHand"
-      laser-controls="hand: right"
-      raycaster="objects: .clickable; far: 25; lineColor: #F24D95; lineOpacity: 0.8"
-    ></a-entity>
 
     <!-- ── Iluminación ambiente sutil ── -->
     <a-entity light="type: ambient; intensity: 1.0; color: #ffffff"></a-entity>
