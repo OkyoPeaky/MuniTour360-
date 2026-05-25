@@ -119,6 +119,27 @@ AFRAME.registerComponent('hotspot-nav', {
     const colorBrillo    = esVideo ? '#F5C97D' : '#F24D95';
     const colorInterior  = esVideo ? '#E0136C' : '#D4A256';   // contraste opuesto
 
+    // ── HITBOX INVISIBLE ──
+    // Cilindro vertical más grande que captura clicks fácilmente,
+    // especialmente desde arriba (mandos VR) o ángulos oblicuos
+    const hitbox = document.createElement('a-entity');
+    hitbox.setAttribute('geometry', {
+      primitive: 'cylinder',
+      radius: 0.65,
+      height: 3.5,
+      segmentsRadial: 16,
+      openEnded: true
+    });
+    hitbox.setAttribute('material', {
+      color: '#000000',
+      opacity: 0,
+      transparent: true,
+      side: 'double'
+    });
+    hitbox.setAttribute('position', '0 1.5 0');
+    hitbox.classList.add('hotspot-hitbox');
+    el.appendChild(hitbox);
+
     // Anillo brillante en el suelo (estilo Street View)
     const ring = document.createElement('a-entity');
     ring.setAttribute('geometry', {
@@ -232,20 +253,30 @@ AFRAME.registerComponent('hotspot-nav', {
       cambiarEscena(data.target);
     };
 
+    // Evento click estándar (mouse + raycaster manual)
     el.addEventListener('click', handleClick);
 
-    // Hover effect
-    el.addEventListener('mouseenter', () => {
-      console.log('[Hotspot] Mouse enter:', data.target);
-      ring.setAttribute('material', 'emissiveIntensity', 1.5);
-      ring.setAttribute('scale', '1.15 1.15 1.15');
+    // Eventos específicos de mandos VR: cuando el láser apunta y se aprieta el trigger
+    el.addEventListener('triggerdown', handleClick);
+    el.addEventListener('selectstart', handleClick);
+
+    // Hover effect (mouse + láser VR)
+    const onHoverIn = () => {
+      console.log('[Hotspot] Hover:', data.target);
+      ring.setAttribute('material', 'emissiveIntensity', 1.8);
+      ring.setAttribute('scale', '1.2 1.2 1.2');
       document.body.style.cursor = 'pointer';
-    });
-    el.addEventListener('mouseleave', () => {
+    };
+    const onHoverOut = () => {
       ring.setAttribute('material', 'emissiveIntensity', 0.8);
       ring.setAttribute('scale', '1 1 1');
       document.body.style.cursor = '';
-    });
+    };
+
+    el.addEventListener('mouseenter', onHoverIn);
+    el.addEventListener('mouseleave', onHoverOut);
+    el.addEventListener('raycaster-intersected', onHoverIn);
+    el.addEventListener('raycaster-intersected-cleared', onHoverOut);
   }
 });
 
@@ -667,28 +698,43 @@ function initControlesVideo() {
   const videoEl      = document.querySelector('#vid-rueda');
 
   if (btnPlayPause) {
+    // Mouse + raycaster manual
     btnPlayPause.addEventListener('click', togglePlayPause);
-    // Hover effect
-    btnPlayPause.addEventListener('mouseenter', () => {
-      btnPlayPause.setAttribute('scale', '1.12 1.12 1.12');
+    // Mandos VR
+    btnPlayPause.addEventListener('triggerdown', togglePlayPause);
+    btnPlayPause.addEventListener('selectstart', togglePlayPause);
+
+    const onIn = () => {
+      btnPlayPause.setAttribute('scale', '1.15 1.15 1.15');
       document.body.style.cursor = 'pointer';
-    });
-    btnPlayPause.addEventListener('mouseleave', () => {
+    };
+    const onOut = () => {
       btnPlayPause.setAttribute('scale', '1 1 1');
       document.body.style.cursor = '';
-    });
+    };
+    btnPlayPause.addEventListener('mouseenter', onIn);
+    btnPlayPause.addEventListener('mouseleave', onOut);
+    btnPlayPause.addEventListener('raycaster-intersected', onIn);
+    btnPlayPause.addEventListener('raycaster-intersected-cleared', onOut);
   }
 
   if (btnBack) {
     btnBack.addEventListener('click', volverDeVideo);
-    btnBack.addEventListener('mouseenter', () => {
-      btnBack.setAttribute('scale', '1.12 1.12 1.12');
+    btnBack.addEventListener('triggerdown', volverDeVideo);
+    btnBack.addEventListener('selectstart', volverDeVideo);
+
+    const onIn = () => {
+      btnBack.setAttribute('scale', '1.15 1.15 1.15');
       document.body.style.cursor = 'pointer';
-    });
-    btnBack.addEventListener('mouseleave', () => {
+    };
+    const onOut = () => {
       btnBack.setAttribute('scale', '1 1 1');
       document.body.style.cursor = '';
-    });
+    };
+    btnBack.addEventListener('mouseenter', onIn);
+    btnBack.addEventListener('mouseleave', onOut);
+    btnBack.addEventListener('raycaster-intersected', onIn);
+    btnBack.addEventListener('raycaster-intersected-cleared', onOut);
   }
 
   if (videoEl) {

@@ -202,14 +202,16 @@
       <!-- ── Controles de Meta Quest dentro del rig (heredan posición correcta) ── -->
       <a-entity
         id="leftHand"
-        laser-controls="hand: left"
-        raycaster="objects: .clickable; far: 25; lineColor: #E0136C; lineOpacity: 0.7"
+        laser-controls="hand: left; model: true"
+        raycaster="objects: .clickable; far: 100; showLine: true; lineColor: #E0136C; lineOpacity: 0.9"
+        line="color: #E0136C; opacity: 0.9"
       ></a-entity>
 
       <a-entity
         id="rightHand"
-        laser-controls="hand: right"
-        raycaster="objects: .clickable; far: 25; lineColor: #F24D95; lineOpacity: 0.8"
+        laser-controls="hand: right; model: true"
+        raycaster="objects: .clickable; far: 100; showLine: true; lineColor: #F24D95; lineOpacity: 0.9"
+        line="color: #F24D95; opacity: 0.9"
       ></a-entity>
     </a-entity>
 
