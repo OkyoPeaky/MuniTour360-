@@ -1,0 +1,294 @@
+/* ═══════════════════════════════════════════════════════════════
+   shared-identity.css — Identidad visual compartida
+   IMMERSIAKS (index2.html) ↔ Demo Cosoleacaque (index.html)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Variables globales compartidas ── */
+:root {
+  /* Colores corporativos */
+  --brand-purple: #6C63FF;
+  --brand-magenta: #E0136C;
+  --brand-dark: #1A0A2E;
+  --brand-light: #EAE8F5;
+  
+  /* Tipografía */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  
+  /* Sombras y bordes */
+  --shadow-soft: 0 4px 20px rgba(108, 99, 255, 0.12);
+  --shadow-strong: 0 12px 40px rgba(224, 19, 108, 0.2);
+  --border-radius: 14px;
+}
+
+/* ── Botones compartidos ── */
+.btn-shared {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary-shared {
+  background: linear-gradient(135deg, var(--brand-purple), var(--brand-magenta));
+  color: #fff;
+}
+.btn-primary-shared:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.btn-ghost-shared {
+  background: transparent;
+  color: var(--brand-purple);
+  border: 1.5px solid var(--brand-purple);
+}
+.btn-ghost-shared:hover {
+  background: rgba(108, 99, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ── Badge de "Demo" o "Beta" ── */
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(224, 19, 108, 0.12);
+  border: 1px solid rgba(224, 19, 108, 0.3);
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-magenta);
+}
+
+/* ── Header compartido (para demo) ── */
+.demo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  background: rgba(26, 10, 46, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(224, 19, 108, 0.2);
+  padding: 0.85rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.demo-header-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+.demo-header-logo span {
+  color: var(--brand-magenta);
+}
+
+.demo-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ── Menú hamburguesa compartido ── */
+.hamburger-btn {
+  display: none; /* solo en mobile */
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 38px;
+  height: 38px;
+  padding: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10000;
+}
+.hamburger-btn span {
+  display: block;
+  height: 2px;
+  width: 24px;
+  background: rgba(234, 232, 245, 0.9);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.hamburger-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Mobile nav panel */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(320px, 85vw);
+  height: 100dvh;
+  background: rgba(26, 10, 46, 0.98);
+  backdrop-filter: blur(16px);
+  padding: 5rem 2rem 2rem;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9500;
+  overflow-y: auto;
+  box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+}
+.mobile-nav.open { right: 0; }
+
+.mobile-nav a {
+  display: block;
+  padding: 0.9rem 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: rgba(234, 232, 245, 0.75);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(224, 19, 108, 0.08);
+  transition: color 0.2s, border-color 0.2s;
+}
+.mobile-nav a:hover {
+  color: var(--brand-magenta);
+  border-bottom-color: rgba(224, 19, 108, 0.25);
+}
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9400;
+}
+.mobile-overlay.open { display: block; }
+
+@media (max-width: 768px) {
+  .hamburger-btn { display: flex; }
+  .demo-header { padding: 0.75rem 1rem; }
+}
+
+/* ── Card de proyecto demo (para index2) ── */
+.demo-project-card {
+  background: linear-gradient(135deg, rgba(26,10,46,0.9) 0%, rgba(59,16,96,0.9) 100%);
+  border: 1px solid rgba(224, 19, 108, 0.25);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.demo-project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+.demo-project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(224,19,108,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+}
+
+.demo-project-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(108, 99, 255, 0.18);
+  border: 1px solid rgba(108, 99, 255, 0.35);
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+  margin-bottom: 1rem;
+}
+
+.demo-project-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.demo-project-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(234, 232, 245, 0.7);
+  margin-bottom: 1.5rem;
+}
+
+.demo-project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.5rem;
+  background: var(--brand-magenta);
+  color: #fff;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.demo-project-btn:hover {
+  background: #B50F57;
+  transform: translateX(3px);
+}
+
+/* ── Responsive fixes ── */
+@media (max-width: 640px) {
+  .demo-project-card { padding: 1.8rem 1.4rem; }
+  .demo-project-title { font-size: 1.25rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CORPORATE NAV MOBILE FIXES (index2.html)
+═══════════════════════════════════════════════════════════════ */
+
+.nav-cta-btn {
+  display: inline-flex;
+}
+
+@media (max-width: 968px) {
+  #navbar .nav-links {
+    display: none !important;
+  }
+  
+  .nav-cta-btn {
+    display: none !important;
+  }
+  
+  #navbar {
+    padding: 1rem 1.5rem;
+    justify-content: space-between;
+  }
+}
+
+#navbar.scrolled {
+  background: rgba(10, 10, 11, 0.96);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}

@@ -1,0 +1,165 @@
+/* merch.css */
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.8rem;
+}
+
+.merch-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(181,15,87,0.07);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.25s ease;
+}
+.merch-card.visible { opacity:1; transform:translateY(0); }
+.merch-card:hover { box-shadow: 0 12px 40px rgba(181,15,87,0.18); transform: translateY(-4px); }
+
+.merch-img {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.merch-img-icon { font-size: 4rem; }
+.merch-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--magenta);
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.merch-body { padding: 1.3rem; }
+.merch-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.merch-desc {
+  font-family: 'Crimson Pro', serif;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+}
+.merch-sizes {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--lila-dark);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.6rem;
+}
+.merch-price {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  color: var(--magenta);
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+.merch-btn {
+  width: 100%;
+  padding: 0.55rem;
+  background: var(--magenta);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.merch-btn:hover { background: var(--magenta-dark); }
+
+/* Cart FAB */
+.cart-fab {
+  position: fixed;
+  bottom: 5rem;
+  right: 1.5rem;
+  background: var(--magenta);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.7rem 1.2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(224,19,108,0.4);
+  z-index: 200;
+  transition: transform 0.2s;
+}
+.cart-fab:hover { transform: scale(1.05); }
+
+/* Cart panel */
+.merch-cart-float {
+  position: fixed;
+  bottom: 8.5rem;
+  right: 1.5rem;
+  width: 300px;
+  max-height: 400px;
+  background: #1A0A2E;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-direction: column;
+  z-index: 199;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+  border: 1px solid rgba(224,19,108,0.3);
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: var(--magenta-dark);
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+.cart-items {
+  overflow-y: auto;
+  flex: 1;
+  padding: 0.8rem 1.2rem;
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Crimson Pro', serif;
+  color: rgba(234,232,245,0.9);
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.cart-total {
+  padding: 0.7rem 1.2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(234,232,245,0.7);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.cart-total strong { color: var(--magenta-light); }
+.merch-checkout-btn {
+  margin: 0.7rem 1.2rem 1rem;
+  width: calc(100% - 2.4rem);
+  padding: 0.65rem;
+  background: var(--magenta);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
