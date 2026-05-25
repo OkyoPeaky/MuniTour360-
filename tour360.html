@@ -17,7 +17,7 @@
   <!-- Componente para hacer entidades clicables con cursor/mando -->
   <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
 
-  <link rel="stylesheet" href="tour360.css?v=3">
+  <link rel="stylesheet" href="../css/tour360.css?v=3">
 </head>
 <body>
 
@@ -100,12 +100,12 @@
 
     <!-- Assets pre-cargados (A-Frame los gestiona correctamente) -->
     <a-assets timeout="60000">
-      <img id="img-pos1" src="pos1.jpg" crossorigin="anonymous">
-      <img id="img-pos2" src="pos2.jpg" crossorigin="anonymous">
+      <img id="img-pos1" src="../Imagenes/360/pos1.jpg" crossorigin="anonymous">
+      <img id="img-pos2" src="../Imagenes/360/pos2.jpg" crossorigin="anonymous">
       <!-- Video 360 — colócalo en Imagenes/360/video-rueda.mp4 -->
       <video
         id="vid-rueda"
-        src="video-rueda.mp4"
+        src="../Imagenes/360/video-rueda.mp4"
         crossorigin="anonymous"
         playsinline
         webkit-playsinline
@@ -122,57 +122,6 @@
     <!-- ── Contenedor de hotspots/infospots (poblado por JS) ── -->
     <a-entity id="spots"></a-entity>
 
-    <!-- ── CONTROLES DE VIDEO 3D (visibles solo en escenas de video) ── -->
-    <a-entity id="video-controls" visible="false" position="0 -1.2 -2.5">
-
-      <!-- Botón Play/Pause -->
-      <a-entity id="btn-playpause" class="clickable video-ctrl" position="-0.7 0 0">
-        <a-circle radius="0.22" color="#0D0512" opacity="0.92" material="shader: flat"></a-circle>
-        <a-circle radius="0.24" color="#E0136C" opacity="0.6" material="shader: flat; side: double" position="0 0 -0.001"></a-circle>
-        <!-- Ícono play (triángulo) -->
-        <a-entity id="icon-play" position="0 0 0.01">
-          <a-triangle
-            color="#EAE8F5"
-            material="shader: flat"
-            vertex-a="-0.06 0.09 0"
-            vertex-b="-0.06 -0.09 0"
-            vertex-c="0.10 0 0">
-          </a-triangle>
-        </a-entity>
-        <!-- Ícono pausa (dos barras) - oculto inicialmente -->
-        <a-entity id="icon-pause" visible="false" position="0 0 0.01">
-          <a-plane width="0.04" height="0.16" color="#EAE8F5" material="shader: flat" position="-0.045 0 0"></a-plane>
-          <a-plane width="0.04" height="0.16" color="#EAE8F5" material="shader: flat" position="0.045 0 0"></a-plane>
-        </a-entity>
-        <!-- Label -->
-        <a-text value="PLAY / PAUSA" align="center" color="#9B96C4" position="0 -0.35 0" width="2.2" font="mozillavr"></a-text>
-      </a-entity>
-
-      <!-- Botón Volver -->
-      <a-entity id="btn-back" class="clickable video-ctrl" position="0.7 0 0">
-        <a-circle radius="0.22" color="#0D0512" opacity="0.92" material="shader: flat"></a-circle>
-        <a-circle radius="0.24" color="#D4A256" opacity="0.6" material="shader: flat; side: double" position="0 0 -0.001"></a-circle>
-        <!-- Ícono flecha izquierda -->
-        <a-entity position="0 0 0.01">
-          <a-triangle
-            color="#EAE8F5"
-            material="shader: flat"
-            vertex-a="0.06 0.09 0"
-            vertex-b="0.06 -0.09 0"
-            vertex-c="-0.10 0 0">
-          </a-triangle>
-        </a-entity>
-        <a-text value="VOLVER" align="center" color="#9B96C4" position="0 -0.35 0" width="2.2" font="mozillavr"></a-text>
-      </a-entity>
-
-      <!-- Barra de progreso -->
-      <a-entity id="progress-bar" position="0 -0.7 0">
-        <a-plane width="2.2" height="0.04" color="#1A0A2E" material="shader: flat" opacity="0.9"></a-plane>
-        <a-plane id="progress-fill" width="0" height="0.04" color="#E0136C" material="shader: flat" position="-1.1 0 0.001"></a-plane>
-      </a-entity>
-
-    </a-entity>
-
     <!-- ── CÁMARA + MANDOS (todo dentro del rig) ── -->
     <a-entity id="rig" position="0 0 0">
       <a-camera
@@ -180,6 +129,61 @@
         wasd-controls-enabled="false"
         position="0 1.6 0"
       >
+        <!-- ── CONTROLES DE VIDEO 3D (dentro de la cámara, siguen la mirada) ── -->
+        <a-entity id="video-controls" visible="false" position="0 -1.4 -3.5">
+
+          <!-- Botón Play/Pause -->
+          <a-entity id="btn-playpause" class="clickable video-ctrl" position="-0.9 0 0">
+            <!-- Hitbox invisible grande para fácil detección por láser -->
+            <a-plane width="0.8" height="0.8" material="shader: flat; color: #ff00ff; opacity: 0.001; transparent: true" class="clickable"></a-plane>
+            <a-circle radius="0.28" color="#0D0512" opacity="0.92" material="shader: flat" position="0 0 0.001"></a-circle>
+            <a-ring radius-inner="0.28" radius-outer="0.32" color="#E0136C" material="shader: flat; side: double" position="0 0 0.002"></a-ring>
+            <!-- Ícono play (triángulo) -->
+            <a-entity id="icon-play" position="0 0 0.01">
+              <a-triangle
+                color="#EAE8F5"
+                material="shader: flat"
+                vertex-a="-0.08 0.12 0"
+                vertex-b="-0.08 -0.12 0"
+                vertex-c="0.13 0 0">
+              </a-triangle>
+            </a-entity>
+            <!-- Ícono pausa (dos barras) - oculto inicialmente -->
+            <a-entity id="icon-pause" visible="false" position="0 0 0.01">
+              <a-plane width="0.05" height="0.2" color="#EAE8F5" material="shader: flat" position="-0.06 0 0"></a-plane>
+              <a-plane width="0.05" height="0.2" color="#EAE8F5" material="shader: flat" position="0.06 0 0"></a-plane>
+            </a-entity>
+            <!-- Label -->
+            <a-text value="PLAY / PAUSA" align="center" color="#9B96C4" position="0 -0.45 0" width="2.5" font="mozillavr"></a-text>
+          </a-entity>
+
+          <!-- Botón Volver -->
+          <a-entity id="btn-back" class="clickable video-ctrl" position="0.9 0 0">
+            <!-- Hitbox invisible grande para fácil detección por láser -->
+            <a-plane width="0.8" height="0.8" material="shader: flat; color: #ff00ff; opacity: 0.001; transparent: true" class="clickable"></a-plane>
+            <a-circle radius="0.28" color="#0D0512" opacity="0.92" material="shader: flat" position="0 0 0.001"></a-circle>
+            <a-ring radius-inner="0.28" radius-outer="0.32" color="#D4A256" material="shader: flat; side: double" position="0 0 0.002"></a-ring>
+            <!-- Ícono flecha izquierda -->
+            <a-entity position="0 0 0.01">
+              <a-triangle
+                color="#EAE8F5"
+                material="shader: flat"
+                vertex-a="0.08 0.12 0"
+                vertex-b="0.08 -0.12 0"
+                vertex-c="-0.13 0 0">
+              </a-triangle>
+            </a-entity>
+            <a-text value="VOLVER" align="center" color="#9B96C4" position="0 -0.45 0" width="2.5" font="mozillavr"></a-text>
+          </a-entity>
+
+          <!-- Barra de progreso -->
+          <a-entity id="progress-bar" position="0 -0.9 0">
+            <a-plane width="2.6" height="0.05" color="#1A0A2E" material="shader: flat" opacity="0.9"></a-plane>
+            <a-plane id="progress-fill" width="0.001" height="0.05" color="#E0136C" material="shader: flat" position="-1.3 0 0.001"></a-plane>
+          </a-entity>
+
+        </a-entity>
+
         <!-- Cursor para VR (controles de cabeza/mando). En desktop, los clicks se manejan con raycast manual desde JS -->
         <a-entity
           cursor="rayOrigin: entity; fuse: false"
@@ -223,7 +227,7 @@
   <!-- ═══════════════════════════════════════════════════
        SCRIPTS
   ═══════════════════════════════════════════════════ -->
-  <script src="tour360.js?v=3"></script>
+  <script src="../js/tour360.js?v=3"></script>
 
   <script>
     // Función para entrar a VR desde botón custom

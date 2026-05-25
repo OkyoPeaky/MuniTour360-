@@ -120,24 +120,25 @@ AFRAME.registerComponent('hotspot-nav', {
     const colorInterior  = esVideo ? '#E0136C' : '#D4A256';   // contraste opuesto
 
     // ── HITBOX INVISIBLE ──
-    // Un disco grande en el piso, físicamente presente para el raycaster
-    // pero invisible visualmente con visible=false (raycaster aún lo ve)
+    // Disco DEBAJO del piso para no interferir con el render de los anillos.
+    // Sigue siendo detectada por el raycaster del láser (que viene de arriba)
     const hitbox = document.createElement('a-entity');
     hitbox.setAttribute('geometry', {
       primitive: 'circle',
-      radius: 0.8,
+      radius: 0.9,
       segments: 24
     });
     hitbox.setAttribute('material', {
       shader: 'flat',
       color: '#ff00ff',
       transparent: true,
-      opacity: 0.001
+      opacity: 0.001,
+      depthWrite: false
     });
     hitbox.setAttribute('rotation', '-90 0 0');
-    hitbox.setAttribute('position', '0 0.02 0');
+    hitbox.setAttribute('position', '0 -0.05 0');
     hitbox.classList.add('hotspot-hitbox');
-    hitbox.classList.add('clickable');  // ← el raycaster del láser también la detecta
+    hitbox.classList.add('clickable');
     el.appendChild(hitbox);
 
     // Anillo brillante en el suelo (estilo Street View)
@@ -712,45 +713,44 @@ function initControlesVideo() {
   const btnBack      = document.getElementById('btn-back');
   const videoEl      = document.querySelector('#vid-rueda');
 
-  if (btnPlayPause) {
-    // Mouse + raycaster manual
-    btnPlayPause.addEventListener('click', togglePlayPause);
-    // Mandos VR
-    btnPlayPause.addEventListener('triggerdown', togglePlayPause);
-    btnPlayPause.addEventListener('selectstart', togglePlayPause);
+  // Helper: propaga eventos de cualquier hijo clickable al botón padre
+  function aplicarHandlers(botonEl, accion) {
+    if (!botonEl) return;
 
+    const onAccion = (evt) => {
+      console.log('[VideoBtn] Activado:', evt.type);
+      accion();
+    };
     const onIn = () => {
-      btnPlayPause.setAttribute('scale', '1.15 1.15 1.15');
+      botonEl.setAttribute('scale', '1.15 1.15 1.15');
       document.body.style.cursor = 'pointer';
     };
     const onOut = () => {
-      btnPlayPause.setAttribute('scale', '1 1 1');
+      botonEl.setAttribute('scale', '1 1 1');
       document.body.style.cursor = '';
     };
-    btnPlayPause.addEventListener('mouseenter', onIn);
-    btnPlayPause.addEventListener('mouseleave', onOut);
-    btnPlayPause.addEventListener('raycaster-intersected', onIn);
-    btnPlayPause.addEventListener('raycaster-intersected-cleared', onOut);
+
+    // Eventos en el botón padre
+    botonEl.addEventListener('click', onAccion);
+    botonEl.addEventListener('triggerdown', onAccion);
+    botonEl.addEventListener('selectstart', onAccion);
+    botonEl.addEventListener('mouseenter', onIn);
+    botonEl.addEventListener('mouseleave', onOut);
+    botonEl.addEventListener('raycaster-intersected', onIn);
+    botonEl.addEventListener('raycaster-intersected-cleared', onOut);
+
+    // Propagar desde TODOS los hijos clickables (hitbox, círculo, etc.)
+    botonEl.querySelectorAll('.clickable').forEach(hijo => {
+      hijo.addEventListener('click', onAccion);
+      hijo.addEventListener('triggerdown', onAccion);
+      hijo.addEventListener('selectstart', onAccion);
+      hijo.addEventListener('raycaster-intersected', onIn);
+      hijo.addEventListener('raycaster-intersected-cleared', onOut);
+    });
   }
 
-  if (btnBack) {
-    btnBack.addEventListener('click', volverDeVideo);
-    btnBack.addEventListener('triggerdown', volverDeVideo);
-    btnBack.addEventListener('selectstart', volverDeVideo);
-
-    const onIn = () => {
-      btnBack.setAttribute('scale', '1.15 1.15 1.15');
-      document.body.style.cursor = 'pointer';
-    };
-    const onOut = () => {
-      btnBack.setAttribute('scale', '1 1 1');
-      document.body.style.cursor = '';
-    };
-    btnBack.addEventListener('mouseenter', onIn);
-    btnBack.addEventListener('mouseleave', onOut);
-    btnBack.addEventListener('raycaster-intersected', onIn);
-    btnBack.addEventListener('raycaster-intersected-cleared', onOut);
-  }
+  aplicarHandlers(btnPlayPause, togglePlayPause);
+  aplicarHandlers(btnBack, volverDeVideo);
 
   if (videoEl) {
     // Cuando el video termina: volver automáticamente a la escena anterior
@@ -765,7 +765,7 @@ function initControlesVideo() {
       const fill = document.getElementById('progress-fill');
       if (!fill || !videoEl.duration) return;
       const ratio = videoEl.currentTime / videoEl.duration;
-      const totalWidth = 2.2;
+      const totalWidth = 2.6;
       const width = totalWidth * ratio;
       fill.setAttribute('width', width);
       // Reposicionar para que crezca desde la izquierda
@@ -961,10 +961,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // Ocultar panel de ajuste en VR
     const panel = document.getElementById('tilt-panel');
     if (panel) panel.style.display = 'none';
-
-    // Mostrar panel de debug 3D en VR
-    crearDebugPanelVR();
-    logVR('Entró a VR');
   });
 
   scene.addEventListener('exit-vr', () => {
@@ -979,49 +975,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 // ════════════════════════════════════════════════════════
-//  PANEL DE DEBUG EN VR
-//  Muestra eventos en tiempo real dentro del mundo 3D
+//  Helper: logVR stub (debug panel desactivado)
 // ════════════════════════════════════════════════════════
-let debugPanelVR = null;
-let debugLines = [];
-
-function crearDebugPanelVR() {
-  if (debugPanelVR) return;
-  const camera = document.querySelector('a-camera');
-  if (!camera) return;
-
-  debugPanelVR = document.createElement('a-entity');
-  debugPanelVR.setAttribute('position', '0 -0.5 -1.5');
-
-  // Fondo
-  const bg = document.createElement('a-entity');
-  bg.setAttribute('geometry', 'primitive: plane; width: 1.5; height: 0.6');
-  bg.setAttribute('material', 'color: #000000; opacity: 0.8; transparent: true');
-  debugPanelVR.appendChild(bg);
-
-  // Texto
-  const txt = document.createElement('a-entity');
-  txt.setAttribute('id', 'debug-text-vr');
-  txt.setAttribute('text', 'value: DEBUG VR\nEsperando eventos...; align: left; color: #00FF00; width: 1.4; font: mozillavr; anchor: left');
-  txt.setAttribute('position', '-0.7 0 0.01');
-  debugPanelVR.appendChild(txt);
-
-  camera.appendChild(debugPanelVR);
-}
-
-function logVR(mensaje) {
-  console.log('[VR]', mensaje);
-  debugLines.push(`${new Date().toLocaleTimeString()} ${mensaje}`);
-  if (debugLines.length > 6) debugLines.shift();
-
-  const txt = document.getElementById('debug-text-vr');
-  if (txt) {
-    txt.setAttribute('text', 'value', 'DEBUG VR\n' + debugLines.join('\n'));
-  }
-}
-
-// Exponer logVR globalmente para que el componente hotspot la use
-window.logVR = logVR;
+window.logVR = function() {};
 
 
 // ════════════════════════════════════════════════════════
