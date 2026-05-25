@@ -120,9 +120,8 @@ AFRAME.registerComponent('hotspot-nav', {
     const colorInterior  = esVideo ? '#E0136C' : '#D4A256';   // contraste opuesto
 
     // ── HITBOX INVISIBLE ──
-    // Un plano grande en el piso, completamente invisible al render
-    // pero detectable por el raycaster. Como es horizontal,
-    // no bloquea visualmente nada (los anillos están encima)
+    // Un disco grande en el piso, físicamente presente para el raycaster
+    // pero invisible visualmente con visible=false (raycaster aún lo ve)
     const hitbox = document.createElement('a-entity');
     hitbox.setAttribute('geometry', {
       primitive: 'circle',
@@ -131,14 +130,14 @@ AFRAME.registerComponent('hotspot-nav', {
     });
     hitbox.setAttribute('material', {
       shader: 'flat',
+      color: '#ff00ff',
       transparent: true,
-      opacity: 0,
-      alphaTest: 0.99,
-      side: 'double'
+      opacity: 0.001
     });
     hitbox.setAttribute('rotation', '-90 0 0');
-    hitbox.setAttribute('position', '0 0.01 0');
+    hitbox.setAttribute('position', '0 0.02 0');
     hitbox.classList.add('hotspot-hitbox');
+    hitbox.classList.add('clickable');  // ← el raycaster del láser también la detecta
     el.appendChild(hitbox);
 
     // Anillo brillante en el suelo (estilo Street View)
@@ -247,6 +246,7 @@ AFRAME.registerComponent('hotspot-nav', {
 
     const handleClick = (evt) => {
       console.log('[Hotspot] Click detectado en:', data.target, evt.type);
+      if (window.logVR) window.logVR(`CLICK ${evt.type} → ${data.target}`);
       if (state.enTransicion) {
         console.log('[Hotspot] Ignorado: en transición');
         return;
@@ -264,6 +264,7 @@ AFRAME.registerComponent('hotspot-nav', {
     // Hover effect (mouse + láser VR)
     const onHoverIn = () => {
       console.log('[Hotspot] Hover:', data.target);
+      if (window.logVR) window.logVR(`HOVER → ${data.target}`);
       ring.setAttribute('material', 'emissiveIntensity', 1.8);
       ring.setAttribute('scale', '1.2 1.2 1.2');
       document.body.style.cursor = 'pointer';
@@ -278,6 +279,19 @@ AFRAME.registerComponent('hotspot-nav', {
     el.addEventListener('mouseleave', onHoverOut);
     el.addEventListener('raycaster-intersected', onHoverIn);
     el.addEventListener('raycaster-intersected-cleared', onHoverOut);
+
+    // Propagar eventos del hitbox al hotspot principal
+    hitbox.addEventListener('click', handleClick);
+    hitbox.addEventListener('triggerdown', handleClick);
+    hitbox.addEventListener('selectstart', handleClick);
+    hitbox.addEventListener('raycaster-intersected', onHoverIn);
+    hitbox.addEventListener('raycaster-intersected-cleared', onHoverOut);
+
+    // También en el anillo visible
+    ring.classList.add('clickable');
+    ring.addEventListener('click', handleClick);
+    ring.addEventListener('triggerdown', handleClick);
+    ring.addEventListener('selectstart', handleClick);
   }
 });
 
@@ -947,6 +961,10 @@ window.addEventListener('DOMContentLoaded', () => {
     // Ocultar panel de ajuste en VR
     const panel = document.getElementById('tilt-panel');
     if (panel) panel.style.display = 'none';
+
+    // Mostrar panel de debug 3D en VR
+    crearDebugPanelVR();
+    logVR('Entró a VR');
   });
 
   scene.addEventListener('exit-vr', () => {
@@ -958,6 +976,52 @@ window.addEventListener('DOMContentLoaded', () => {
   // Inicializar panel de ajuste de inclinación
   initTiltPanel();
 });
+
+
+// ════════════════════════════════════════════════════════
+//  PANEL DE DEBUG EN VR
+//  Muestra eventos en tiempo real dentro del mundo 3D
+// ════════════════════════════════════════════════════════
+let debugPanelVR = null;
+let debugLines = [];
+
+function crearDebugPanelVR() {
+  if (debugPanelVR) return;
+  const camera = document.querySelector('a-camera');
+  if (!camera) return;
+
+  debugPanelVR = document.createElement('a-entity');
+  debugPanelVR.setAttribute('position', '0 -0.5 -1.5');
+
+  // Fondo
+  const bg = document.createElement('a-entity');
+  bg.setAttribute('geometry', 'primitive: plane; width: 1.5; height: 0.6');
+  bg.setAttribute('material', 'color: #000000; opacity: 0.8; transparent: true');
+  debugPanelVR.appendChild(bg);
+
+  // Texto
+  const txt = document.createElement('a-entity');
+  txt.setAttribute('id', 'debug-text-vr');
+  txt.setAttribute('text', 'value: DEBUG VR\nEsperando eventos...; align: left; color: #00FF00; width: 1.4; font: mozillavr; anchor: left');
+  txt.setAttribute('position', '-0.7 0 0.01');
+  debugPanelVR.appendChild(txt);
+
+  camera.appendChild(debugPanelVR);
+}
+
+function logVR(mensaje) {
+  console.log('[VR]', mensaje);
+  debugLines.push(`${new Date().toLocaleTimeString()} ${mensaje}`);
+  if (debugLines.length > 6) debugLines.shift();
+
+  const txt = document.getElementById('debug-text-vr');
+  if (txt) {
+    txt.setAttribute('text', 'value', 'DEBUG VR\n' + debugLines.join('\n'));
+  }
+}
+
+// Exponer logVR globalmente para que el componente hotspot la use
+window.logVR = logVR;
 
 
 // ════════════════════════════════════════════════════════
