@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace — INMERSIAK · Cosoleacaque</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="marketplace.css">
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="logo">IMMERSIA<span>K</span></a>
+  <a href="munitour360.html" class="nav-back">← Cosoleacaque</a>
+  <button class="nav-cart-btn" id="cart-open-btn" onclick="openCart()">
+    🛒 Carrito <span class="cart-badge" id="cart-count">0</span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="mkt-hero">
+  <div class="container">
+    <div class="mkt-hero-inner">
+      <div>
+        <div class="mkt-hero-tag">
+          <span>📍</span> Cosoleacaque, Veracruz
+        </div>
+        <h1>Marketplace<br><span>Turístico Local</span></h1>
+        <p>Artesanos, gastronomía, tours y productos locales de Cosoleacaque. Apoya la economía regional y lleva la cultura a casa.</p>
+      </div>
+      <div class="mkt-hero-stats">
+        <div class="mkt-stat">
+          <div class="mkt-stat-num">12</div>
+          <div class="mkt-stat-lbl">Artesanos</div>
+        </div>
+        <div class="mkt-stat">
+          <div class="mkt-stat-num">8</div>
+          <div class="mkt-stat-lbl">Platillos</div>
+        </div>
+        <div class="mkt-stat">
+          <div class="mkt-stat-num">5</div>
+          <div class="mkt-stat-lbl">Tours</div>
+        </div>
+        <div class="mkt-stat">
+          <div class="mkt-stat-num">+30</div>
+          <div class="mkt-stat-lbl">Productos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILTROS ── -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-cat="all">Todo</button>
+        <button class="filter-tab" data-cat="artesania">🧵 Artesanías</button>
+        <button class="filter-tab" data-cat="gastronomia">🍽️ Gastronomía</button>
+        <button class="filter-tab" data-cat="tour">🎒 Tours</button>
+        <button class="filter-tab" data-cat="souvenir">🎁 Souvenirs</button>
+        <button class="filter-tab" data-cat="guia">🗺️ Guías</button>
+      </div>
+      <div class="filter-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Buscar productos..." id="search-input">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTENIDO PRINCIPAL ── -->
+<main class="mkt-content">
+  <div class="container">
+
+    <!-- DESTACADOS -->
+    <section class="mkt-section">
+      <div class="mkt-section-header">
+        <h2>⭐ Destacados del día</h2>
+        <a href="#todos" class="see-all">Ver todos →</a>
+      </div>
+      <div class="featured-grid">
+        <!-- Featured grande -->
+        <div class="feat-card">
+          <div class="feat-card-bg" style="background:linear-gradient(135deg,#1a1020,#3d1060)">
+            <span style="position:relative;z-index:1">🧺</span>
+            <div class="feat-overlay"></div>
+          </div>
+          <div class="feat-body">
+            <span class="feat-cat">Artesanía · Palma</span>
+            <h4>Cesto de Palma Artesanal</h4>
+            <p>Tejido a mano por maestros artesanos con fibra de palma real. Tamaños variados. Incluye certificado de autenticidad.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span class="feat-price">$180 – $320</span>
+              <button class="prod-add" onclick="addToCart('Cesto de Palma', 250)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+        <!-- Featured medianos -->
+        <div class="feat-card">
+          <div class="feat-card-bg" style="background:linear-gradient(135deg,#0a1520,#1a3555)">
+            <span style="position:relative;z-index:1">🎒</span>
+            <div class="feat-overlay"></div>
+          </div>
+          <div class="feat-body">
+            <span class="feat-cat">Tour · Cultural</span>
+            <h4>Recorrido Cultural Guiado</h4>
+            <p>Tour completo por el municipio: iglesia, mercado, zonas arqueológicas y gastronomía típica. 3 horas.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span class="feat-price">Desde $350</span>
+              <button class="prod-add" onclick="addToCart('Recorrido Cultural', 350)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-bg" style="background:linear-gradient(135deg,#1a1520,#3d0840)">
+            <span style="position:relative;z-index:1">👚</span>
+            <div class="feat-overlay"></div>
+          </div>
+          <div class="feat-body">
+            <span class="feat-cat">Textil · Manta</span>
+            <h4>Blusa Bordada de Manta</h4>
+            <p>Bordado a mano con diseños florales y olmecas. Algodón 100% natural. Disponible en varios colores.</p>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span class="feat-price">$450 – $580</span>
+              <button class="prod-add" onclick="addToCart('Blusa Bordada', 515)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODOS LOS PRODUCTOS -->
+    <section class="mkt-section" id="todos">
+      <div class="mkt-section-header">
+        <h2>🛍️ Todos los productos</h2>
+        <span style="font-size:.84rem;color:var(--text3)" id="prod-count">18 productos</span>
+      </div>
+      <div class="products-grid" id="products-grid">
+
+        <div class="prod-card" data-cat="artesania">
+          <div class="prod-img" style="background:linear-gradient(135deg,#1a1020,#2a1845)">
+            🧺
+            <span class="prod-badge badge-pop">Popular</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Artesanía</span>
+            <h5>Cesto de Palma</h5>
+            <p>Tejido a mano con fibra natural de palma real.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$250</span>
+              <button class="prod-add" onclick="addToCart('Cesto de Palma', 250)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="artesania">
+          <div class="prod-img" style="background:linear-gradient(135deg,#1a1520,#2a0830)">
+            👚
+            <span class="prod-badge badge-pop">Popular</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Textil</span>
+            <h5>Blusa Bordada Manta</h5>
+            <p>Diseños florales bordados a mano. Algodón natural.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$515</span>
+              <button class="prod-add" onclick="addToCart('Blusa Bordada', 515)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="artesania">
+          <div class="prod-img" style="background:linear-gradient(135deg,#151520,#1a1a35)">
+            📿
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Joyería</span>
+            <h5>Collar de Semillas</h5>
+            <p>Semillas naturales de la región, acabado artesanal.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$160</span>
+              <button class="prod-add" onclick="addToCart('Collar de Semillas', 160)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="artesania">
+          <div class="prod-img" style="background:linear-gradient(135deg,#151010,#201515)">
+            👒
+            <span class="prod-badge badge-new">Nuevo</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Textil</span>
+            <h5>Sombrero de Palma</h5>
+            <p>Trenzado a mano, ideal para el clima veracruzano.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$250</span>
+              <button class="prod-add" onclick="addToCart('Sombrero de Palma', 250)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="gastronomia">
+          <div class="prod-img" style="background:linear-gradient(135deg,#1a1010,#2a1808)">
+            ☕
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Gastronomía</span>
+            <h5>Popo Tradicional</h5>
+            <p>Bebida ceremonial olmeca de cacao, maíz y especias.</p>
+            <div class="prod-footer">
+              <span class="prod-price">Precio local</span>
+              <button class="prod-add" onclick="addToCart('Popo Tradicional', 60)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="gastronomia">
+          <div class="prod-img" style="background:linear-gradient(135deg,#1a1208,#251a08)">
+            🫔
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Gastronomía</span>
+            <h5>Tamales Regionales</h5>
+            <p>Tamales de rajas, chipilín y elote. Receta tradicional.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$35 c/u</span>
+              <button class="prod-add" onclick="addToCart('Tamales (6 pzas)', 210)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="gastronomia">
+          <div class="prod-img" style="background:linear-gradient(135deg,#0a1508,#121f0a)">
+            🍹
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Gastronomía</span>
+            <h5>Asquiote Natural</h5>
+            <p>Bebida refrescante de semilla de calabaza tostada.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$45</span>
+              <button class="prod-add" onclick="addToCart('Asquiote Natural', 45)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="gastronomia">
+          <div class="prod-img" style="background:linear-gradient(135deg,#201008,#301508)">
+            🍞
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Gastronomía</span>
+            <h5>Pan de Horno Tradicional</h5>
+            <p>Pan artesanal horneado en leña. Sabores regionales.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$25 c/u</span>
+              <button class="prod-add" onclick="addToCart('Pan Tradicional (3 pzas)', 75)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="tour">
+          <div class="prod-img" style="background:linear-gradient(135deg,#0a1520,#0d2535)">
+            🎒
+            <span class="prod-badge badge-pop">Popular</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Tour</span>
+            <h5>Recorrido Cultural Completo</h5>
+            <p>Iglesia, mercado, zona olmeca y gastronomía. 3 hrs.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$350 / p.</span>
+              <button class="prod-add" onclick="addToCart('Tour Cultural Completo', 350)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="tour">
+          <div class="prod-img" style="background:linear-gradient(135deg,#081510,#0d2018)">
+            🌿
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Tour</span>
+            <h5>Tour Ecoturismo</h5>
+            <p>Manglares, ríos y selva tropical. Guía naturalista. 4 hrs.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$420 / p.</span>
+              <button class="prod-add" onclick="addToCart('Tour Ecoturismo', 420)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="tour">
+          <div class="prod-img" style="background:linear-gradient(135deg,#150a20,#251040)">
+            🌐
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Tour · Digital</span>
+            <h5>Experiencia 360° VR</h5>
+            <p>Recorrido virtual guiado con visor VR por el municipio.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$150 / p.</span>
+              <button class="prod-add" onclick="addToCart('Experiencia 360° VR', 150)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="souvenir">
+          <div class="prod-img" style="background:linear-gradient(135deg,#101520,#151a2a)">
+            👕
+            <span class="prod-badge badge-new">Nuevo</span>
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Souvenir</span>
+            <h5>Playera Cosoleacaque</h5>
+            <p>Diseño exclusivo con identidad municipal. 100% algodón.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$320</span>
+              <button class="prod-add" onclick="addToCart('Playera Cosoleacaque', 320)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="souvenir">
+          <div class="prod-img" style="background:linear-gradient(135deg,#0a1520,#101f30)">
+            🧢
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Souvenir</span>
+            <h5>Gorra Sur Veracruz</h5>
+            <p>Bordado especial, talla única ajustable.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$280</span>
+              <button class="prod-add" onclick="addToCart('Gorra Sur Veracruz', 280)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="souvenir">
+          <div class="prod-img" style="background:linear-gradient(135deg,#151010,#251515)">
+            ☕
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Souvenir</span>
+            <h5>Taza Cerámica</h5>
+            <p>Ilustración artesanal de monumentos locales.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$190</span>
+              <button class="prod-add" onclick="addToCart('Taza Cerámica', 190)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="souvenir">
+          <div class="prod-img" style="background:linear-gradient(135deg,#101510,#181e18)">
+            🛍️
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Souvenir</span>
+            <h5>Tote Bag Regional</h5>
+            <p>Ilustraciones culturales. Tela resistente reutilizable.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$160</span>
+              <button class="prod-add" onclick="addToCart('Tote Bag Regional', 160)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="souvenir">
+          <div class="prod-img" style="background:linear-gradient(135deg,#151015,#201520)">
+            🖼️
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Souvenir</span>
+            <h5>Póster Artístico</h5>
+            <p>Impresión de alta calidad. Diseños exclusivos del municipio.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$220</span>
+              <button class="prod-add" onclick="addToCart('Póster Artístico', 220)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="artesania">
+          <div class="prod-img" style="background:linear-gradient(135deg,#1a1208,#201808)">
+            🏺
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Artesanía · Barro</span>
+            <h5>Figura de Barro</h5>
+            <p>Piezas de barro negro con motivos olmecas. Hecha a mano.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$180</span>
+              <button class="prod-add" onclick="addToCart('Figura de Barro', 180)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prod-card" data-cat="artesania">
+          <div class="prod-img" style="background:linear-gradient(135deg,#101a15,#152015)">
+            🪡
+          </div>
+          <div class="prod-body">
+            <span class="prod-cat">Artesanía · Fibra</span>
+            <h5>Set Pulseras Naturales</h5>
+            <p>Fibras y semillas de la selva veracruzana. Set de 5 pulseras.</p>
+            <div class="prod-footer">
+              <span class="prod-price">$90</span>
+              <button class="prod-add" onclick="addToCart('Set Pulseras', 90)">+ Añadir</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ARTESANOS -->
+    <section class="mkt-section">
+      <div class="mkt-section-header">
+        <h2>🧵 Artesanos del municipio</h2>
+        <a href="artesanos.html" class="see-all">Ver todos →</a>
+      </div>
+      <div class="artisans-row">
+        <div class="artisan-card">
+          <div class="artisan-avatar">👩‍🎨</div>
+          <div class="artisan-info">
+            <h4>Esperanza Méndez</h4>
+            <span class="artisan-trade">Bordado y Textiles</span>
+            <p>Más de 30 años tejiendo la cultura olmeca en blusas, manteles y tapetes. Premio estatal de artesanías 2022.</p>
+            <div class="artisan-tags">
+              <span class="artisan-tag">Bordado</span>
+              <span class="artisan-tag">Manta</span>
+              <span class="artisan-tag">Textil</span>
+            </div>
+          </div>
+        </div>
+        <div class="artisan-card">
+          <div class="artisan-avatar">👨‍🎨</div>
+          <div class="artisan-info">
+            <h4>Aurelio Vázquez</h4>
+            <span class="artisan-trade">Palma y Fibra Natural</span>
+            <p>Maestro cestero con técnicas heredadas de su abuela. Cada pieza refleja la naturaleza de la región.</p>
+            <div class="artisan-tags">
+              <span class="artisan-tag">Palma</span>
+              <span class="artisan-tag">Sombreros</span>
+              <span class="artisan-tag">Cestos</span>
+            </div>
+          </div>
+        </div>
+        <div class="artisan-card">
+          <div class="artisan-avatar">👩‍🔧</div>
+          <div class="artisan-info">
+            <h4>Lucía Torres</h4>
+            <span class="artisan-trade">Joyería y Semillas</span>
+            <p>Diseñadora autodidacta que transforma semillas y fibras regionales en joyería única y contemporánea.</p>
+            <div class="artisan-tags">
+              <span class="artisan-tag">Joyería</span>
+              <span class="artisan-tag">Semillas</span>
+              <span class="artisan-tag">Pulseras</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIAS -->
+    <section class="mkt-section">
+      <div class="mkt-section-header">
+        <h2>🎒 Experiencias turísticas</h2>
+      </div>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-item-img" style="background:linear-gradient(135deg,#0a1520,#0d2535)">🌐</div>
+          <div class="exp-item-body">
+            <span class="exp-item-type">Digital · VR</span>
+            <h4>Mercado 360° Interactivo</h4>
+            <p>Explora el mercado municipal en una experiencia inmersiva de realidad virtual. Compras integradas.</p>
+            <div class="exp-item-footer">
+              <span class="exp-price">Gratis</span>
+              <a href="mercado360.html" style="color:var(--blue2);font-size:.8rem;text-decoration:none">Entrar →</a>
+            </div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-item-img" style="background:linear-gradient(135deg,#0f1a10,#142215)">🌿</div>
+          <div class="exp-item-body">
+            <span class="exp-item-type">Ecoturismo</span>
+            <h4>Manglares y Ríos Naturales</h4>
+            <p>Kayak por los manglares y avistamiento de fauna local. Guía certificado incluido.</p>
+            <div class="exp-item-footer">
+              <span class="exp-price">$420/p.</span>
+              <span class="exp-duration">4 horas</span>
+            </div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-item-img" style="background:linear-gradient(135deg,#150a20,#251040)">🏛️</div>
+          <div class="exp-item-body">
+            <span class="exp-item-type">Cultural · Histórico</span>
+            <h4>Zona Arqueológica Olmeca</h4>
+            <p>Visita guiada a sitios arqueológicos con arqueólogo local y contexto histórico completo.</p>
+            <div class="exp-item-footer">
+              <span class="exp-price">$280/p.</span>
+              <span class="exp-duration">2.5 horas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAPA -->
+    <div class="map-section">
+      <div class="map-header">
+        <div>
+          <h2>📍 Ubicación</h2>
+          <p>Cosoleacaque, Veracruz, México</p>
+        </div>
+        <a href="munitour360.html" style="color:var(--blue2);font-size:.84rem;text-decoration:none">Ver municipio completo →</a>
+      </div>
+      <iframe
+        class="map-embed"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30237.24041827843!2d-94.07490!3d18.00143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85f3cdefa09d5e41%3A0x1a9d42fcda3dde52!2sCosoleacaque%2C%20Ver.!5e0!3m2!1ses!2smx!4v1716000000000"
+        loading="lazy"
+        title="Mapa de Cosoleacaque">
+      </iframe>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-simple">
+      <p>© 2026 INMERSIAK · Marketplace de Cosoleacaque</p>
+      <div style="display:flex;gap:24px">
+        <a href="index.html">Inicio</a>
+        <a href="munitour360.html">Municipio</a>
+        <a href="artesanos.html">Artesanos</a>
+        <a href="merch.html">Tienda</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── CARRITO PANEL ── -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-panel" id="cart-panel">
+  <div class="cart-panel-header">
+    <h3>🛒 Tu carrito</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">Tu carrito está vacío.<br>¡Agrega productos y experiencias!</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>Total:</span>
+      <strong id="cart-total">$0</strong>
+    </div>
+    <a href="#" class="cart-checkout" id="cart-checkout-btn" onclick="checkoutWhatsApp()">
+      Pedir por WhatsApp 💬
+    </a>
+  </div>
+</div>
+
+<script>
+const cart = [];
+
+function addToCart(name, price) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+  updateCart();
+  const btn = event.target;
+  btn.textContent = '✓ Añadido';
+  btn.classList.add('added');
+  setTimeout(() => {
+    btn.textContent = '+ Añadir';
+    btn.classList.remove('added');
+  }, 1800);
+}
+
+function removeFromCart(idx) {
+  cart.splice(idx, 1);
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cart-count').textContent = count;
+
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  document.getElementById('cart-total').textContent = '$' + total.toLocaleString();
+
+  const el = document.getElementById('cart-items');
+  if (!cart.length) {
+    el.innerHTML = '<div class="cart-empty">Tu carrito está vacío.<br>¡Agrega productos!</div>';
+    return;
+  }
+  el.innerHTML = cart.map((item, idx) => `
+    <div class="cart-item">
+      <div class="cart-item-icon">🛍️</div>
+      <div>
+        <div class="cart-item-name">${item.name} ×${item.qty}</div>
+        <div class="cart-item-price">$${(item.price * item.qty).toLocaleString()}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${idx})">✕</button>
+    </div>
+  `).join('');
+}
+
+function openCart() {
+  document.getElementById('cart-panel').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cart-panel').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function checkoutWhatsApp() {
+  if (!cart.length) return;
+  const lines = cart.map(i => `• ${i.name} ×${i.qty} — $${(i.price * i.qty).toLocaleString()}`).join('%0A');
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const msg = `Hola! Quiero hacer un pedido desde el marketplace de Cosoleacaque:%0A%0A${lines}%0A%0ATotal: $${total.toLocaleString()}%0A%0AMarketplace INMERSIAK`;
+  window.open(`https://wa.me/529221234567?text=${msg}`, '_blank');
+}
+
+// Filtros de categoría
+document.querySelectorAll('.filter-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    const cards = document.querySelectorAll('.prod-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const show = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    document.getElementById('prod-count').textContent = visible + ' productos';
+  });
+});
+
+// Búsqueda
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  const cards = document.querySelectorAll('.prod-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const name = card.querySelector('h5')?.textContent.toLowerCase() || '';
+    const cat = card.querySelector('.prod-cat')?.textContent.toLowerCase() || '';
+    const show = !q || name.includes(q) || cat.includes(q);
+    card.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('prod-count').textContent = visible + ' productos';
+});
+
+// Scroll nav
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background =
+    window.scrollY > 40 ? 'rgba(10,10,11,.95)' : 'rgba(10,10,11,.8)';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INMERSIAK — Productora Audiovisual · Municipios</title>
+  <meta name="description" content="Productora audiovisual especializada en documentación cultural, recorridos 360° y plataformas turísticas para municipios mexicanos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles3.css">
+  <link rel="stylesheet" href="shared-identity.css">
+  <link rel="stylesheet" href="fixes.css">
+  <style>
+    /* ━━ INMERSIAK — diseño 2026 ━━ */
+
+    :root {
+      --bg:    #0A0A0B;
+      --bg2:   #16181D;
+      --blue0: #0D47A1;
+      --blue1: #2D9CDB;
+      --blue2: #4DB8FF;
+      --text:  #F5F7FA;
+      --text2: rgba(245,247,250,.58);
+      --text3: rgba(245,247,250,.3);
+      --rule:  rgba(255,255,255,.08);
+    }
+
+    /* ─ NAV ─ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 0 56px; height: 68px;
+      background: rgba(10,10,11,.86);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--rule);
+    }
+    #navbar .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      letter-spacing: -.02em; color: var(--text);
+      text-decoration: none; margin-right: auto;
+    }
+    #navbar .logo span { color: var(--blue2); }
+    .nav-links {
+      display: flex; list-style: none;
+      gap: 36px; margin: 0 36px 0 0;
+    }
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .875rem; font-weight: 400;
+      color: var(--text2); text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .875rem; font-weight: 500;
+      padding: 9px 22px;
+      background: linear-gradient(135deg, var(--blue1), var(--blue0));
+      border-radius: 9px; color: #fff;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+      box-shadow: 0 3px 14px rgba(45,156,219,.22);
+    }
+    .nav-cta-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+    /* ─ CONTENEDOR GLOBAL ─ */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 56px;
+    }
+
+    /* ─ HERO ─ */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 56px 80px;
+      position: relative;
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      background: rgba(77,184,255,.08);
+      border: 1px solid rgba(77,184,255,.22);
+      border-radius: 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--blue2);
+      margin-bottom: 36px;
+      animation: fadeIn .7s ease both;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--blue2);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(.7); }
+    }
+
+    .hero-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 800; line-height: .97;
+      letter-spacing: -.03em; color: var(--text);
+      max-width: 860px; margin-bottom: 44px;
+      animation: fadeUp 1s ease both .08s;
+    }
+    .hero-headline em { font-style: normal; color: var(--blue2); }
+
+    .hero-row {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 48px;
+      animation: fadeUp .9s ease both .22s;
+    }
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem; color: var(--text2);
+      max-width: 440px; line-height: 1.75;
+    }
+    .hero-btns { display: flex; gap: 16px; align-items: center; flex-shrink: 0; }
+    .hbtn-p {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      background: linear-gradient(135deg, var(--blue1), var(--blue0));
+      color: #fff;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 500;
+      text-decoration: none; border-radius: 9px;
+      transition: opacity .2s, transform .15s;
+      box-shadow: 0 4px 20px rgba(45,156,219,.28);
+    }
+    .hbtn-p:hover { opacity: .9; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,156,219,.38); }
+    .hbtn-g {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 9px;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 400;
+      color: var(--text); text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .hbtn-g:hover { border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.04); }
+
+    /* Reel placeholder */
+    .hero-reel {
+      width: 100%; aspect-ratio: 21 / 9;
+      background: linear-gradient(135deg, #0e0e18, #13131f);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 64px; position: relative; overflow: hidden;
+      cursor: pointer;
+      transition: border-color .35s, box-shadow .35s;
+      animation: fadeUp 1s ease both .4s;
+    }
+    .hero-reel:hover {
+      border-color: rgba(77,184,255,.18);
+      box-shadow: 0 0 60px rgba(45,156,219,.1);
+    }
+    .reel-inner {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 18px; z-index: 2;
+    }
+    .reel-play {
+      width: 68px; height: 68px; border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .3s, transform .25s, background .3s;
+    }
+    .hero-reel:hover .reel-play {
+      border-color: rgba(77,184,255,.5);
+      background: rgba(77,184,255,.1);
+      transform: scale(1.08);
+    }
+    .reel-play::after {
+      content: ''; border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent rgba(255,255,255,.7);
+      margin-left: 5px;
+    }
+    .reel-label {
+      font-family: 'DM Sans', sans-serif; font-size: .75rem;
+      letter-spacing: .06em; color: var(--text3);
+    }
+
+    /* ─ SEPARADOR DE SECCIÓN ─ */
+    .s-rule {
+      height: 1px; background: var(--rule); margin: 0;
+    }
+    .s-head {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 40px;
+      padding: 40px 0 72px;
+    }
+    .s-idx {
+      font-family: 'DM Sans', sans-serif; font-size: .72rem;
+      font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--blue2);
+      margin-bottom: 16px;
+    }
+    .s-h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; letter-spacing: -.025em;
+      color: var(--text); line-height: 1.1;
+    }
+    .s-h2 em { font-style: italic; color: var(--text2); font-weight: 400; }
+    .s-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .875rem; color: var(--text2);
+      max-width: 300px; line-height: 1.7;
+      text-align: right; padding-top: 48px;
+    }
+
+    /* ─ SERVICIOS ─ */
+    #servicios { padding: 100px 0; }
+    .srv-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .srv-item {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px;
+      padding: 48px 36px 52px;
+      transition: background .3s, border-color .3s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .srv-item::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue1), var(--blue0));
+      border-radius: 14px 14px 0 0;
+      opacity: 0; transition: opacity .3s;
+    }
+    .srv-item:hover {
+      background: #1a1d26;
+      border-color: rgba(77,184,255,.14);
+      transform: translateY(-3px);
+    }
+    .srv-item:hover::before { opacity: 1; }
+    .srv-n {
+      font-family: 'DM Sans', sans-serif; font-size: .72rem;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue2); margin-bottom: 32px;
+    }
+    .srv-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.45rem; font-weight: 700;
+      color: var(--text); line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .srv-item p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .875rem; color: var(--text2);
+      line-height: 1.75; margin-bottom: 36px;
+    }
+    .srv-ref {
+      display: block;
+      font-family: 'DM Sans', sans-serif; font-size: .7rem;
+      color: var(--text3);
+      border-top: 1px solid var(--rule); padding-top: 16px;
+      font-style: italic;
+    }
+
+    /* ─ PROYECTO ─ */
+    #proyecto { padding: 100px 0; }
+    .proy-frame {
+      width: 100%; aspect-ratio: 16 / 8;
+      background: var(--bg2);
+      border: 1px solid var(--rule); border-radius: 14px;
+      overflow: hidden; position: relative;
+      margin-bottom: 52px;
+    }
+    .proy-frame img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; opacity: .85;
+      transition: opacity .4s, transform .7s;
+    }
+    .proy-frame:hover img { opacity: .95; transform: scale(1.025); }
+    .proy-frame::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,11,.75) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .proy-caption {
+      position: absolute; bottom: 28px; left: 32px; z-index: 2;
+      font-family: 'DM Sans', sans-serif; font-size: .72rem;
+      font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+    }
+
+    .proy-meta {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 48px; align-items: start;
+    }
+    .proy-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700; color: var(--text);
+      letter-spacing: -.025em; line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .proy-desc {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .875rem; color: var(--text2); line-height: 1.7;
+    }
+    .proy-stats {
+      display: flex; gap: 48px;
+      padding-top: 32px; margin-top: 32px;
+      border-top: 1px solid var(--rule);
+    }
+    .pstat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--text); letter-spacing: -.025em; line-height: 1;
+    }
+    .pstat-lbl {
+      font-family: 'DM Sans', sans-serif; font-size: .72rem;
+      font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text3); margin-top: 6px;
+    }
+    .proy-links {
+      display: flex; flex-direction: column;
+      gap: 10px; align-items: flex-end; padding-top: 8px;
+    }
+    .plink {
+      font-family: 'DM Sans', sans-serif; font-size: .875rem;
+      font-weight: 400;
+      color: var(--text2); text-decoration: none;
+      padding: 9px 20px;
+      border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+      transition: border-color .2s, background .2s; white-space: nowrap;
+    }
+    .plink:hover { border-color: rgba(255,255,255,.24); background: rgba(255,255,255,.04); }
+    .plink.accent {
+      background: linear-gradient(135deg, var(--blue1), var(--blue0));
+      border-color: transparent; color: #fff;
+      box-shadow: 0 4px 16px rgba(45,156,219,.22);
+    }
+    .plink.accent:hover { opacity: .9; box-shadow: 0 6px 22px rgba(45,156,219,.36); }
+
+    /* Galería placeholders */
+    .gal-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 64px;
+    }
+    .gal-cell {
+      aspect-ratio: 4/3; background: var(--bg2);
+      border: 1px solid var(--rule); border-radius: 12px;
+      display: flex; align-items: flex-end; padding: 14px 16px;
+      position: relative; overflow: hidden;
+    }
+    .gal-lbl {
+      font-family: 'DM Sans', sans-serif; font-size: .68rem;
+      color: var(--text3); font-style: italic;
+    }
+
+    /* ─ PROCESO ─ */
+    #proceso { padding: 100px 0; }
+    .proc-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .proc-item {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px;
+      padding: 40px 28px 48px;
+      transition: background .3s, border-color .3s;
+    }
+    .proc-item:hover {
+      background: #1a1d26;
+      border-color: rgba(77,184,255,.12);
+    }
+    .proc-n {
+      font-family: 'DM Sans', sans-serif; font-size: .72rem;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue2); margin-bottom: 24px;
+    }
+    .proc-item h4 {
+      font-family: 'Syne', sans-serif; font-size: 1.05rem;
+      font-weight: 700; color: var(--text);
+      margin-bottom: 12px; line-height: 1.2;
+    }
+    .proc-item p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem; color: var(--text2); line-height: 1.7;
+    }
+
+    /* ─ CONTACTO ─ */
+    #contacto { padding: 120px 0; }
+    .cto-grid {
+      display: grid; grid-template-columns: 1fr 1.15fr;
+      gap: 80px; align-items: start;
+    }
+    .cto-h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 700; color: var(--text);
+      letter-spacing: -.025em; line-height: 1.0;
+      margin-bottom: 20px;
+    }
+    .cto-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .875rem; color: var(--text2); line-height: 1.7; max-width: 340px;
+    }
+    .cto-list {
+      margin-top: 40px; display: flex;
+      flex-direction: column; gap: 12px;
+    }
+    .cto-li {
+      font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      font-weight: 400; color: var(--text2);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .cto-li::before {
+      content: ''; display: block;
+      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(77,184,255,.12);
+      border: 1px solid rgba(77,184,255,.28);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%234DB8FF' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: 10px;
+    }
+
+    .cto-form { display: flex; flex-direction: column; gap: 18px; }
+    .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .cf-group { display: flex; flex-direction: column; gap: 6px; }
+    .cf-group label {
+      font-family: 'DM Sans', sans-serif; font-size: .78rem;
+      font-weight: 500; color: var(--text2);
+    }
+    .cf-group input,
+    .cf-group select,
+    .cf-group textarea {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+      padding: 12px 14px; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .cf-group input::placeholder,
+    .cf-group textarea::placeholder { color: var(--text3); }
+    .cf-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,247,250,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px; padding-right: 36px; }
+    .cf-group select option { background: #16181D; }
+    .cf-group input:focus,
+    .cf-group select:focus,
+    .cf-group textarea:focus { border-color: rgba(45,156,219,.5); box-shadow: 0 0 0 3px rgba(45,156,219,.1); }
+    .cf-group textarea { resize: none; }
+    .cf-submit {
+      align-self: flex-start;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 500;
+      padding: 13px 32px;
+      background: linear-gradient(135deg, var(--blue1), var(--blue0));
+      color: #fff; border: none; border-radius: 9px;
+      cursor: pointer;
+      transition: opacity .2s, transform .15s;
+      box-shadow: 0 4px 20px rgba(45,156,219,.25);
+    }
+    .cf-submit:hover { opacity: .9; transform: translateY(-2px); }
+
+    /* ─ FOOTER ─ */
+    .footer-strip {
+      border-top: 1px solid var(--rule);
+      padding: 32px 56px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 32px;
+    }
+    .footer-strip .logo {
+      font-family: 'Syne', sans-serif; font-size: 1.1rem;
+      font-weight: 800; letter-spacing: -.01em;
+      color: var(--text); text-decoration: none;
+    }
+    .footer-strip .logo span { color: var(--blue2); }
+    .footer-fnav { display: flex; gap: 28px; }
+    .footer-fnav a {
+      font-family: 'DM Sans', sans-serif; font-size: .82rem;
+      color: var(--text3); text-decoration: none; transition: color .2s;
+    }
+    .footer-fnav a:hover { color: var(--text); }
+    .footer-strip p {
+      font-family: 'DM Sans', sans-serif; font-size: .78rem; color: var(--text3);
+    }
+
+    /* ─ ANIMACIONES ─ */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─ RESPONSIVE ─ */
+    @media (max-width: 960px) {
+      #navbar { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 80px 24px 72px; }
+      .wrap { padding: 0 24px; }
+      .srv-grid { grid-template-columns: 1fr; }
+      .proc-grid { grid-template-columns: 1fr 1fr; }
+      .cto-grid { grid-template-columns: 1fr; gap: 48px; }
+      .proy-meta { grid-template-columns: 1fr; gap: 32px; }
+      .proy-links { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+      .gal-strip { grid-template-columns: 1fr 1fr; }
+      .footer-strip { flex-direction: column; text-align: center; padding: 28px 24px; gap: 20px; }
+      .footer-fnav { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 580px) {
+      .hero-headline { font-size: 3rem; }
+      .hero-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+      .s-head { flex-direction: column; gap: 8px; }
+      .s-desc { text-align: left; padding-top: 0; }
+      .proy-stats { flex-wrap: wrap; gap: 28px; }
+      .proc-grid { grid-template-columns: 1fr; }
+      .gal-strip { grid-template-columns: 1fr; }
+      .cf-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="index.html" class="logo">IMMERSIA<span>K</span></a>
+  <ul class="nav-links" id="corp-nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proyecto">Proyectos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta-btn">Trabajar con nosotros</a>
+  <button class="hamburger-btn" id="corp-hamburger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="corp-mobile-nav">
+  <a href="#servicios">Servicios</a>
+  <a href="#proyecto">Proyectos</a>
+  <a href="#proceso">Proceso</a>
+  <a href="#contacto">Contacto</a>
+  <a href="munitour360.html" style="color:var(--blue2)">Cosoleacaque 360°</a>
+</div>
+<div class="mobile-overlay" id="corp-mobile-overlay"></div>
+
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Productora audiovisual · Municipios · México</div>
+    <h1 class="hero-headline">
+      Producimos la<br>
+      identidad <em>digital</em><br>
+      de tu municipio
+    </h1>
+    <div class="hero-row">
+      <p class="hero-sub">
+        Documentamos, producimos y digitalizamos el patrimonio cultural y turístico de municipios mexicanos con tecnología 360° y plataformas inmersivas.
+      </p>
+      <div class="hero-btns">
+        <a href="munitour360.html" class="hbtn-p">
+          Ver proyecto activo
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#servicios" class="hbtn-g">Nuestros servicios</a>
+      </div>
+    </div>
+
+    <!-- /* Video demo */ -->
+    <div class="hero-reel" onclick="window.location.href='munitour360.html'" title="Ver proyecto Cosoleacaque">
+      <div class="reel-inner">
+        <div class="reel-play"></div>
+        <span class="reel-label">Reel · INMERSIAK 2026 · Cosoleacaque, Veracruz</span>
+      </div>
+      <!-- /* Video reel */ -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SERVICIOS ── -->
+<section id="servicios">
+  <div class="wrap">
+    <hr class="s-rule">
+    <div class="s-head">
+      <div>
+        <div class="s-idx">01 / Servicios</div>
+        <h2 class="s-h2">Producción audiovisual<br><em>para el territorio</em></h2>
+      </div>
+      <p class="s-desc">Proyectos integrales de documentación cultural y plataformas turísticas para municipios.</p>
+    </div>
+
+    <div class="srv-grid fade-up">
+      <div class="srv-item">
+        <div class="srv-n">01</div>
+        <h3>Recorridos 360°</h3>
+        <p>Fotografía y video panorámico inmersivo de los espacios físicos reales del municipio: mercados, iglesias, parques y sitios históricos.</p>
+        <span class="srv-ref">/* Imagen referencia */</span>
+      </div>
+      <div class="srv-item">
+        <div class="srv-n">02</div>
+        <h3>Cine Documental</h3>
+        <p>Documentales culturales que narran la identidad, tradiciones y patrimonio inmaterial de cada municipio con producción cinematográfica.</p>
+        <span class="srv-ref">/* Video demo */</span>
+      </div>
+      <div class="srv-item">
+        <div class="srv-n">03</div>
+        <h3>Plataforma Turística</h3>
+        <p>Portales web con mapas interactivos, recorridos virtuales y contenido multimedia estructurado por rutas y categorías temáticas.</p>
+        <span class="srv-ref">/* Imagen referencia */</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PROYECTO ACTIVO ── -->
+<section id="proyecto">
+  <div class="wrap">
+    <hr class="s-rule">
+    <div class="s-head">
+      <div>
+        <div class="s-idx">02 / Proyecto activo</div>
+        <h2 class="s-h2">Cosoleacaque,<br><em>Veracruz</em></h2>
+      </div>
+      <p class="s-desc">Primer municipio documentado por INMERSIAK. En producción activa desde 2026.</p>
+    </div>
+
+    <!-- /* Imagen referencia */ -->
+    <div class="proy-frame fade-up">
+      <img src="Iglesia.jpg" alt="Parroquia San Juan Bautista, Cosoleacaque" loading="lazy">
+      <div class="proy-caption">Parroquia San Juan Bautista · Cosoleacaque, Ver. · 2026</div>
+      <!-- /* Imagen referencia */ -->
+    </div>
+
+    <div class="proy-meta fade-up">
+      <div>
+        <h3 class="proy-title">MuniTour360 · Cosoleacaque</h3>
+        <p class="proy-desc">Plataforma turística completa para el municipio de Cosoleacaque, Veracruz. Incluye portal cultural, recorridos 360° de cinco sitios estratégicos y mapa interactivo de rutas con navegación en tiempo real.</p>
+        <div class="proy-stats">
+          <div>
+            <div class="pstat-val">5</div>
+            <div class="pstat-lbl">Recorridos 360°</div>
+          </div>
+          <div>
+            <div class="pstat-val">01</div>
+            <div class="pstat-lbl">Municipio activo</div>
+          </div>
+          <div>
+            <div class="pstat-val">2026</div>
+            <div class="pstat-lbl">En producción</div>
+          </div>
+        </div>
+      </div>
+      <div class="proy-links">
+        <a href="munitour360.html" class="plink accent">Portal cultural →</a>
+        <a href="mercado360.html"  class="plink">Visor 360° →</a>
+        <a href="munitour360.html#mapa-rutas" class="plink">Mapa de rutas →</a>
+      </div>
+    </div>
+
+    <!-- /* Galería proyecto */ -->
+    <div class="gal-strip fade-up">
+      <div class="gal-cell"><span class="gal-lbl">/* Galería — foto 01 */</span></div>
+      <div class="gal-cell"><span class="gal-lbl">/* Galería — foto 02 */</span></div>
+      <div class="gal-cell"><span class="gal-lbl">/* Galería — foto 03 */</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PROCESO ── -->
+<section id="proceso">
+  <div class="wrap">
+    <hr class="s-rule">
+    <div class="s-head">
+      <div>
+        <div class="s-idx">03 / Proceso</div>
+        <h2 class="s-h2">Cómo trabajamos<br><em>con un municipio</em></h2>
+      </div>
+      <p class="s-desc">Metodología probada en campo para garantizar autenticidad y calidad en cada proyecto.</p>
+    </div>
+
+    <div class="proc-grid fade-up">
+      <div class="proc-item">
+        <div class="proc-n">01</div>
+        <h4>Diagnóstico territorial</h4>
+        <p>Visita de campo, entrevistas con la comunidad y mapeo del patrimonio cultural e histórico del municipio.</p>
+      </div>
+      <div class="proc-item">
+        <div class="proc-n">02</div>
+        <h4>Producción en campo</h4>
+        <p>Grabación 360°, fotografía documental, producción de video y captura de contenido en los espacios reales.</p>
+      </div>
+      <div class="proc-item">
+        <div class="proc-n">03</div>
+        <h4>Plataforma digital</h4>
+        <p>Desarrollo del portal turístico con recorridos inmersivos, mapa interactivo y arquitectura de contenido multimedia.</p>
+      </div>
+      <div class="proc-item">
+        <div class="proc-n">04</div>
+        <h4>Lanzamiento y difusión</h4>
+        <p>Publicación, posicionamiento digital y actualización continua para mantener la plataforma viva y relevante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CONTACTO ── -->
+<section id="contacto">
+  <div class="wrap">
+    <hr class="s-rule">
+    <div class="s-head">
+      <div>
+        <div class="s-idx">04 / Contacto</div>
+        <h2 class="s-h2">¿Tu municipio merece<br><em>ser documentado?</em></h2>
+      </div>
+    </div>
+
+    <div class="cto-grid fade-up">
+      <div>
+        <p class="cto-sub">Trabajamos con municipios, instituciones culturales y gobiernos locales para crear plataformas turísticas digitales auténticas.</p>
+        <div class="cto-list">
+          <div class="cto-li">Producción en campo</div>
+          <div class="cto-li">Plataforma personalizada</div>
+          <div class="cto-li">Recorridos 360° originales</div>
+          <div class="cto-li">Consulta sin costo</div>
+        </div>
+      </div>
+
+      <form class="cto-form" onsubmit="handleSubmit(event)">
+        <div class="cf-row">
+          <div class="cf-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre completo">
+          </div>
+          <div class="cf-group">
+            <label>Email</label>
+            <input type="email" placeholder="tu@email.com">
+          </div>
+        </div>
+        <div class="cf-group">
+          <label>Municipio o institución</label>
+          <input type="text" placeholder="Nombre del municipio, ayuntamiento u organización">
+        </div>
+        <div class="cf-group">
+          <label>¿Qué necesitas?</label>
+          <select>
+            <option value="">Selecciona un servicio</option>
+            <option>Plataforma turística completa</option>
+            <option>Producción de recorridos 360°</option>
+            <option>Documental cultural</option>
+            <option>Mapa interactivo de rutas</option>
+            <option>Identidad digital municipal</option>
+          </select>
+        </div>
+        <div class="cf-group">
+          <label>Cuéntanos tu proyecto</label>
+          <textarea rows="4" placeholder="Describe brevemente tu municipio y lo que buscas lograr..."></textarea>
+        </div>
+        <button type="submit" class="cf-submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="footer-strip">
+  <a href="index.html" class="logo">IMMERSIA<span>K</span></a>
+  <nav class="footer-fnav">
+    <a href="#servicios">Servicios</a>
+    <a href="#proyecto">Proyectos</a>
+    <a href="munitour360.html">Cosoleacaque</a>
+    <a href="mercado360.html">Visor 360°</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <p>© 2026 INMERSIAK · Veracruz, México</p>
+</footer>
+
+<script src="main2.js"></script>
+</body>
+</html>

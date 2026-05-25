@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<!--
+  ═══════════════════════════════════════════════════════════
+  TEMPLATE MUNICIPIO — INMERSIAK
+  ═══════════════════════════════════════════════════════════
+
+  CÓMO PERSONALIZAR:
+  1. Busca "<!-- MUNICIPIO:" y reemplaza los datos del municipio
+  2. En <style> al final, cambia las variables CSS de colores
+  3. Reemplaza imágenes en el atributo style="background-image:url(...)"
+  4. Actualiza el embed del mapa de Google Maps
+  5. Llena el contenido de cada sección con datos reales
+
+  SECCIONES INCLUIDAS:
+  ✓ Hero con imagen/video de fondo
+  ✓ Barra de estadísticas
+  ✓ Intro / Historia
+  ✓ Lugares importantes
+  ✓ Mapa interactivo
+  ✓ Zonas turísticas
+  ✓ Gastronomía
+  ✓ Artesanos
+  ✓ Eventos y festividades
+  ✓ Recorridos 360°
+  ✓ Galería visual
+  ✓ Estadísticas turísticas
+  ✓ CTA / Contacto
+  ✓ Footer
+  ═══════════════════════════════════════════════════════════
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- MUNICIPIO: Cambia el título -->
+  <title>Cosoleacaque — Experiencia Turística Digital · INMERSIAK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@300;400;600&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="template-municipio.css">
+
+  <style>
+    /* ── PERSONALIZACIÓN DEL MUNICIPIO ── */
+    :root {
+      --primary:       #E0136C;   /* Color principal */
+      --primary-dark:  #B50F57;
+      --primary-light: #F24D95;
+      --accent:        #6B65A0;
+      --accent-light:  #9B96C4;
+      --bg-base:       #EAE8F5;
+      --bg-dark:       #1A0A2E;
+      --text-main:     #2E1A35;
+      --text-body:     #4A3558;
+      --text-muted:    #7A6888;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVEGACIÓN ── -->
+<nav class="tm-nav" id="tm-nav">
+  <a href="index.html" class="tm-nav-logo">← INMERSIAK</a>
+  <!-- MUNICIPIO: Cambia el nombre -->
+  <span class="tm-municipio-name">Cosoleacaque</span>
+  <ul class="tm-nav-links">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#lugares">Lugares</a></li>
+    <li><a href="#gastronomia">Gastronomía</a></li>
+    <li><a href="#artesanos">Artesanos</a></li>
+    <li><a href="#360">360°</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="marketplace.html" style="color:var(--primary-light)">Marketplace</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 1: HERO
+══════════════════════════════════════════════════════ -->
+<section class="tm-hero" id="inicio">
+  <!-- MUNICIPIO: Cambia la imagen de fondo del hero -->
+  <div class="tm-hero-bg" style="background-image:url('Iglesia.jpg')"></div>
+  <div class="tm-hero-overlay"></div>
+  <div class="tm-hero-content">
+    <!-- MUNICIPIO: Cambia estado y nombre -->
+    <div class="tm-hero-state">Veracruz, México</div>
+    <h1 class="tm-hero-title">Cosoleacaque</h1>
+    <p class="tm-hero-subtitle">
+      Donde la cultura olmeca, el arte y la gastronomía regional crean una experiencia única e irrepetible
+    </p>
+    <div class="tm-hero-btns">
+      <a href="#historia" class="tm-btn-primary">Explorar municipio</a>
+      <a href="mercado360.html" class="tm-btn-ghost">🌐 Ver en 360°</a>
+    </div>
+  </div>
+  <div class="tm-hero-scroll">
+    <div class="tm-hero-scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     ESTADÍSTICAS DEL MUNICIPIO
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" style="padding:60px 0">
+  <div class="tm-container">
+    <!-- MUNICIPIO: Actualiza los números -->
+    <div class="tm-stats-bar">
+      <div class="tm-stat">
+        <div class="tm-stat-num">75K</div>
+        <div class="tm-stat-lbl">Habitantes</div>
+      </div>
+      <div class="tm-stat">
+        <div class="tm-stat-num">8+</div>
+        <div class="tm-stat-lbl">Festividades anuales</div>
+      </div>
+      <div class="tm-stat">
+        <div class="tm-stat-num">12</div>
+        <div class="tm-stat-lbl">Artesanos registrados</div>
+      </div>
+      <div class="tm-stat">
+        <div class="tm-stat-num">5</div>
+        <div class="tm-stat-lbl">Destinos 360°</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 2: HISTORIA E INTRO
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="historia">
+  <div class="tm-container">
+    <div class="tm-intro-grid">
+      <div>
+        <!-- MUNICIPIO: Cambia el tag de sección -->
+        <div class="tm-section-tag">Historia & Cultura</div>
+        <h2 class="tm-section-title">Un municipio con<br>raíces olmecas</h2>
+        <!-- MUNICIPIO: Cambia el texto de historia -->
+        <p class="tm-section-body">
+          Cosoleacaque es un municipio del sur de Veracruz cuya historia se remonta a las civilizaciones olmecas. Su nombre proviene del náhuatl y significa "lugar donde abunda el copal junto al agua". Con una rica mezcla de tradiciones prehispánicas y coloniales, es un destino que cautiva por su autenticidad y calidez humana.
+        </p>
+        <p class="tm-section-body" style="margin-top:16px">
+          Sus fiestas patronales, su gastronomía única —con el popo y el asquiote como bebidas ceremoniales— y sus maestros artesanos hacen de Cosoleacaque un tesoro cultural del sureste mexicano.
+        </p>
+        <a href="marketplace.html" class="tm-btn-primary" style="margin-top:28px;display:inline-flex">Explorar marketplace →</a>
+      </div>
+      <!-- MUNICIPIO: Cambia la imagen -->
+      <div class="tm-intro-image">
+        <img src="Parque.jpg" alt="Cosoleacaque" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 3: LUGARES IMPORTANTES
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="lugares" style="background:var(--white)">
+  <div class="tm-container">
+    <div class="tm-section-tag">Lugares</div>
+    <h2 class="tm-section-title">Lugares que no<br>te puedes perder</h2>
+    <!-- MUNICIPIO: Agrega o modifica las tarjetas de lugares -->
+    <div class="tm-places-grid">
+      <div class="tm-place-card">
+        <!-- MUNICIPIO: Cambia la imagen de fondo -->
+        <div class="tm-place-img" style="background-image:url('Iglesia.jpg');background-size:cover">
+        </div>
+        <div class="tm-place-body">
+          <div class="tm-place-type">Patrimonio · Religioso</div>
+          <h4>Parroquia San Juan Bautista</h4>
+          <p>Iglesia del siglo XVII, símbolo de la fe y la identidad del municipio. Arquitectura colonial única en la región.</p>
+        </div>
+      </div>
+      <div class="tm-place-card">
+        <div class="tm-place-img" style="background-image:url('mercado.webp');background-size:cover">
+        </div>
+        <div class="tm-place-body">
+          <div class="tm-place-type">Comercio · Cultural</div>
+          <h4>Mercado Municipal</h4>
+          <p>Centro de vida local donde convergen artesanos, comerciantes y la mejor gastronomía regional de Veracruz.</p>
+        </div>
+      </div>
+      <div class="tm-place-card">
+        <div class="tm-place-img" style="background-image:url('Parque.jpg');background-size:cover">
+        </div>
+        <div class="tm-place-body">
+          <div class="tm-place-type">Espacio público · Recreativo</div>
+          <h4>Parque Central</h4>
+          <p>El corazón del municipio. Kiosco histórico, jardines y el lugar de encuentro de toda la comunidad.</p>
+        </div>
+      </div>
+      <div class="tm-place-card">
+        <div class="tm-place-img" style="background-image:url('choca.jpg');background-size:cover">
+        </div>
+        <div class="tm-place-body">
+          <div class="tm-place-type">Deporte · Recreativo</div>
+          <h4>Centro Deportivo La Choca</h4>
+          <p>Instalaciones deportivas de primer nivel. Sede de torneos regionales y eventos culturales.</p>
+        </div>
+      </div>
+      <div class="tm-place-card">
+        <div class="tm-place-img" style="background:linear-gradient(135deg,#0a1520,#1a3555);display:flex;align-items:center;justify-content:center;font-size:3.5rem">
+          🌊
+        </div>
+        <div class="tm-place-body">
+          <div class="tm-place-type">Naturaleza · Ecoturismo</div>
+          <h4>Ríos y Manglares</h4>
+          <p>Ecosistemas de manglar y ríos tropicales perfectos para kayak, avistamiento de aves y ecoturismo.</p>
+        </div>
+      </div>
+      <div class="tm-place-card">
+        <div class="tm-place-img" style="background:linear-gradient(135deg,#20100a,#3d1a08);display:flex;align-items:center;justify-content:center;font-size:3.5rem">
+          🏛️
+        </div>
+        <div class="tm-place-body">
+          <div class="tm-place-type">Arqueología · Historia</div>
+          <h4>Zona Arqueológica Olmeca</h4>
+          <p>Vestigios de la civilización olmeca, considerada la "cultura madre" de Mesoamérica. Visitas guiadas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 4: MAPA INTERACTIVO
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="mapa" style="padding:60px 0">
+  <div class="tm-container">
+    <div style="margin-bottom:28px">
+      <div class="tm-section-tag">Ubicación</div>
+      <h2 class="tm-section-title">Cómo llegar</h2>
+    </div>
+    <!-- MUNICIPIO: Actualiza el embed del mapa con coordenadas reales -->
+    <div class="tm-map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30237.24041827843!2d-94.07490!3d18.00143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85f3cdefa09d5e41%3A0x1a9d42fcda3dde52!2sCosoleacaque%2C%20Ver.!5e0!3m2!1ses!2smx!4v1716000000000"
+        loading="lazy"
+        title="Mapa de Cosoleacaque">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     PARALLAX 1
+══════════════════════════════════════════════════════ -->
+<div class="tm-parallax">
+  <!-- MUNICIPIO: Cambia la imagen del parallax -->
+  <div class="tm-parallax-bg" style="background-image:url('Parque.jpg')"></div>
+  <div class="tm-parallax-overlay"></div>
+  <div class="tm-parallax-text">
+    <blockquote>"El sur de Veracruz guarda en sus tradiciones el alma de la civilización más antigua de México"</blockquote>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 5: ZONAS TURÍSTICAS
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="zonas">
+  <div class="tm-container">
+    <div class="tm-section-tag">Turismo</div>
+    <h2 class="tm-section-title">Zonas turísticas<br>del municipio</h2>
+    <!-- MUNICIPIO: Personaliza las zonas turísticas -->
+    <div class="tm-zones-grid">
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">🏛️</div>
+        <h4>Zona Arqueológica</h4>
+        <p>Sitios olmecas y prehispánicos con visitas guiadas y contexto histórico.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">🌿</div>
+        <h4>Ecoturismo</h4>
+        <p>Manglares, ríos y selva tropical para kayak y avistamiento de fauna.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">🏪</div>
+        <h4>Zona Comercial</h4>
+        <p>Mercado municipal, artesanos y gastronomía regional en un solo lugar.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">⛪</div>
+        <h4>Centro Histórico</h4>
+        <p>Iglesia colonial, parque central y arquitectura del siglo XIX.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">🎪</div>
+        <h4>Zona Cultural</h4>
+        <p>Casa de la cultura, eventos, fandangos y festividades patronales.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">⚽</div>
+        <h4>Zona Deportiva</h4>
+        <p>Centro deportivo La Choca, canchas, torneos y eventos recreativos.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">🌊</div>
+        <h4>Zona Acuática</h4>
+        <p>Ríos navegables, zonas de pesca y recreación acuática familiar.</p>
+      </div>
+      <div class="tm-zone-card tm-reveal">
+        <div class="tm-zone-icon">🍽️</div>
+        <h4>Corredor Gastronómico</h4>
+        <p>Restaurantes, fondas y cocinas tradicionales del sur veracruzano.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 6: GASTRONOMÍA
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="gastronomia" style="background:var(--white)">
+  <div class="tm-container">
+    <div class="tm-section-tag">Sabores</div>
+    <h2 class="tm-section-title">Gastronomía<br>que enamora</h2>
+    <!-- MUNICIPIO: Personaliza los platillos y bebidas -->
+    <div class="tm-food-grid">
+      <div class="tm-food-list">
+        <div class="tm-food-item tm-reveal">
+          <div class="tm-food-icon">☕</div>
+          <div class="tm-food-info">
+            <h5>Popo</h5>
+            <p>Bebida ceremonial de cacao, maíz, vainilla y canela. Herencia olmeca milenaria que se sirve fría y espumosa.</p>
+          </div>
+        </div>
+        <div class="tm-food-item tm-reveal">
+          <div class="tm-food-icon">🫔</div>
+          <div class="tm-food-info">
+            <h5>Tamales Regionales</h5>
+            <p>Tamales de rajas, chipilín, elote y frijol negro. Envueltos en hoja de plátano con masa de nixtamal.</p>
+          </div>
+        </div>
+        <div class="tm-food-item tm-reveal">
+          <div class="tm-food-icon">🍹</div>
+          <div class="tm-food-info">
+            <h5>Asquiote</h5>
+            <p>Bebida refrescante de semilla de calabaza tostada con especias regionales. Única en la zona.</p>
+          </div>
+        </div>
+        <div class="tm-food-item tm-reveal">
+          <div class="tm-food-icon">🍞</div>
+          <div class="tm-food-info">
+            <h5>Pan de Horno</h5>
+            <p>Pan artesanal horneado en horno de leña. Receta familiar de más de tres generaciones.</p>
+          </div>
+        </div>
+        <div class="tm-food-item tm-reveal">
+          <div class="tm-food-icon">🐟</div>
+          <div class="tm-food-info">
+            <h5>Pescado a la Veracruzana</h5>
+            <p>Filete fresco en salsa de jitomate con aceitunas, alcaparras y chiles. Clásico del sureste.</p>
+          </div>
+        </div>
+        <div class="tm-food-item tm-reveal">
+          <div class="tm-food-icon">🍲</div>
+          <div class="tm-food-info">
+            <h5>Caldo de Res Regional</h5>
+            <p>Caldo sustancioso con verduras de temporada y hierbas aromáticas de la región.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tm-food-image">🌽</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     PARALLAX 2
+══════════════════════════════════════════════════════ -->
+<div class="tm-parallax">
+  <div class="tm-parallax-bg" style="background-image:url('Iglesia fuera.jpg')"></div>
+  <div class="tm-parallax-overlay"></div>
+  <div class="tm-parallax-text">
+    <blockquote>"Cada artesanía es una historia tejida con las manos y el corazón de Cosoleacaque"</blockquote>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 7: ARTESANOS
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="artesanos">
+  <div class="tm-container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px;flex-wrap:wrap">
+      <div>
+        <div class="tm-section-tag">Artesanías</div>
+        <h2 class="tm-section-title">Maestros del<br>arte local</h2>
+      </div>
+      <a href="artesanos.html" class="tm-btn-primary">Ver catálogo completo →</a>
+    </div>
+    <!-- MUNICIPIO: Personaliza los artesanos -->
+    <div class="tm-artisans-grid">
+      <div class="tm-artisan-card tm-reveal">
+        <div class="tm-artisan-avatar">👩‍🎨</div>
+        <h4>Esperanza Méndez</h4>
+        <span class="tm-artisan-trade">Bordado y Textiles</span>
+        <p>Más de 30 años tejiendo la cultura olmeca en blusas, manteles y tapetes. Premio estatal de artesanías 2022.</p>
+      </div>
+      <div class="tm-artisan-card tm-reveal">
+        <div class="tm-artisan-avatar">👨‍🎨</div>
+        <h4>Aurelio Vázquez</h4>
+        <span class="tm-artisan-trade">Palma y Fibra Natural</span>
+        <p>Maestro cestero con técnicas heredadas de su abuela. Cestos, sombreros y petates con fibra regional.</p>
+      </div>
+      <div class="tm-artisan-card tm-reveal">
+        <div class="tm-artisan-avatar">👩‍🔧</div>
+        <h4>Lucía Torres</h4>
+        <span class="tm-artisan-trade">Joyería y Semillas</span>
+        <p>Transforma semillas y fibras de la selva veracruzana en joyería única y contemporánea.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 8: EVENTOS Y FESTIVIDADES
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="eventos" style="background:var(--white)">
+  <div class="tm-container">
+    <div class="tm-section-tag">Calendario</div>
+    <h2 class="tm-section-title">Eventos y<br>festividades</h2>
+    <!-- MUNICIPIO: Personaliza los eventos del municipio -->
+    <div class="tm-events-list">
+      <div class="tm-event-item tm-reveal">
+        <div class="tm-event-date">
+          <span class="tm-event-month">Ene</span>
+          <div class="tm-event-day">15</div>
+        </div>
+        <div class="tm-event-divider"></div>
+        <div class="tm-event-info">
+          <h5>Fiestas Patronales de San Juan Bautista</h5>
+          <p>Procesiones, música de Son Jarocho, danzas tradicionales y gastronomía regional. El evento más importante del año.</p>
+        </div>
+        <span class="tm-event-tag">Principal</span>
+      </div>
+      <div class="tm-event-item tm-reveal">
+        <div class="tm-event-date">
+          <span class="tm-event-month">Mar</span>
+          <div class="tm-event-day">22</div>
+        </div>
+        <div class="tm-event-divider"></div>
+        <div class="tm-event-info">
+          <h5>Fandango Regional</h5>
+          <p>Noche de Son Jarocho, fandango comunitario con jaranistas, arpistas y cantadores de toda la región.</p>
+        </div>
+        <span class="tm-event-tag">Cultural</span>
+      </div>
+      <div class="tm-event-item tm-reveal">
+        <div class="tm-event-date">
+          <span class="tm-event-month">Jun</span>
+          <div class="tm-event-day">10</div>
+        </div>
+        <div class="tm-event-divider"></div>
+        <div class="tm-event-info">
+          <h5>Feria Artesanal Municipal</h5>
+          <p>Exposición y venta de artesanías locales, demostraciones de técnicas ancestrales y talleres abiertos.</p>
+        </div>
+        <span class="tm-event-tag">Artesanías</span>
+      </div>
+      <div class="tm-event-item tm-reveal">
+        <div class="tm-event-date">
+          <span class="tm-event-month">Oct</span>
+          <div class="tm-event-day">28</div>
+        </div>
+        <div class="tm-event-divider"></div>
+        <div class="tm-event-info">
+          <h5>Día de Muertos Regional</h5>
+          <p>Altares, ofrendas, música tradicional y recorrido nocturno por el panteón municipal. Tradición centenaria.</p>
+        </div>
+        <span class="tm-event-tag">Tradición</span>
+      </div>
+      <div class="tm-event-item tm-reveal">
+        <div class="tm-event-date">
+          <span class="tm-event-month">Dic</span>
+          <div class="tm-event-day">12</div>
+        </div>
+        <div class="tm-event-divider"></div>
+        <div class="tm-event-info">
+          <h5>Peregrinación a la Virgen de Guadalupe</h5>
+          <p>Procesión masiva con música, danzas y adoraciones. Une a comunidades de todo el municipio.</p>
+        </div>
+        <span class="tm-event-tag">Religioso</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 9: RECORRIDOS 360°
+══════════════════════════════════════════════════════ -->
+<section class="tm-section tm-dark" id="360">
+  <div class="tm-container">
+    <div class="tm-section-tag">Inmersión</div>
+    <h2 class="tm-section-title">Explora en 360°</h2>
+    <p class="tm-section-body" style="margin-bottom:0">Recorridos virtuales interactivos por los principales destinos del municipio. Disponibles desde cualquier dispositivo.</p>
+    <!-- MUNICIPIO: Agrega o modifica los recorridos 360 -->
+    <div class="tm-tours360-grid">
+      <a href="mercado360.html" class="tm-tour-card" style="text-decoration:none">
+        <div class="tm-tour-thumb" style="background:linear-gradient(135deg,#1a1020,#2d1050)">
+          🏪
+          <div class="tm-tour-overlay"></div>
+          <span class="tm-360-badge">360°</span>
+        </div>
+        <div class="tm-tour-body">
+          <h5>Mercado Municipal</h5>
+          <p>Explora el corazón comercial del municipio en vista panorámica.</p>
+        </div>
+      </a>
+      <a href="mercado360.html" class="tm-tour-card" style="text-decoration:none">
+        <div class="tm-tour-thumb" style="background:linear-gradient(135deg,#0a1520,#152035)">
+          ⛪
+          <div class="tm-tour-overlay"></div>
+          <span class="tm-360-badge">360°</span>
+        </div>
+        <div class="tm-tour-body">
+          <h5>Parroquia San Juan Bautista</h5>
+          <p>Visita virtual por la iglesia colonial más emblemática.</p>
+        </div>
+      </a>
+      <a href="mercado360.html" class="tm-tour-card" style="text-decoration:none">
+        <div class="tm-tour-thumb" style="background:linear-gradient(135deg,#0f1a10,#162212)">
+          🌳
+          <div class="tm-tour-overlay"></div>
+          <span class="tm-360-badge">360°</span>
+        </div>
+        <div class="tm-tour-body">
+          <h5>Parque Central</h5>
+          <p>Recorre el kiosco y los jardines del corazón del municipio.</p>
+        </div>
+      </a>
+      <a href="mercado360.html" class="tm-tour-card" style="text-decoration:none">
+        <div class="tm-tour-thumb" style="background:linear-gradient(135deg,#150f1a,#251535)">
+          🎡
+          <div class="tm-tour-overlay"></div>
+          <span class="tm-360-badge">360°</span>
+        </div>
+        <div class="tm-tour-body">
+          <h5>Parque & Casa Cultural</h5>
+          <p>Rueda de la fortuna, espacios culturales y eventos.</p>
+        </div>
+      </a>
+      <a href="mercado360.html" class="tm-tour-card" style="text-decoration:none">
+        <div class="tm-tour-thumb" style="background:linear-gradient(135deg,#0a1215,#101820)">
+          ⚽
+          <div class="tm-tour-overlay"></div>
+          <span class="tm-360-badge">360°</span>
+        </div>
+        <div class="tm-tour-body">
+          <h5>Centro Deportivo La Choca</h5>
+          <p>Instalaciones deportivas y área recreativa del municipio.</p>
+        </div>
+      </a>
+      <div class="tm-tour-card" style="background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;min-height:180px;cursor:default">
+        <div style="text-align:center;padding:24px;color:rgba(255,255,255,.5)">
+          <div style="font-size:2rem;margin-bottom:10px">+</div>
+          <div style="font-size:.82rem">Más destinos<br>próximamente</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="mercado360.html" class="tm-btn-primary">Entrar al visor 360° →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 10: GALERÍA VISUAL
+══════════════════════════════════════════════════════ -->
+<section class="tm-section" id="galeria" style="background:var(--white)">
+  <div class="tm-container">
+    <div class="tm-section-tag">Galería</div>
+    <h2 class="tm-section-title">Imágenes del<br>municipio</h2>
+    <!-- MUNICIPIO: Reemplaza las imágenes con fotos reales del municipio -->
+    <div class="tm-gallery-grid">
+      <div class="tm-gallery-item">
+        <img src="Iglesia.jpg" alt="Iglesia de Cosoleacaque" loading="lazy">
+      </div>
+      <div class="tm-gallery-item">
+        <img src="Parque.jpg" alt="Parque Central" loading="lazy">
+      </div>
+      <div class="tm-gallery-item">
+        <img src="mercado.webp" alt="Mercado Municipal" loading="lazy">
+      </div>
+      <div class="tm-gallery-item">
+        <img src="choca.jpg" alt="Centro La Choca" loading="lazy">
+      </div>
+      <div class="tm-gallery-item">
+        <img src="parque2.webp" alt="Parque alternativo" loading="lazy">
+      </div>
+      <div class="tm-gallery-item">
+        <img src="Fiesta patronales.png" alt="Fiestas Patronales" loading="lazy">
+      </div>
+      <div class="tm-gallery-item">
+        <img src="PAN.png" alt="Pan Tradicional" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 11: ESTADÍSTICAS TURÍSTICAS
+══════════════════════════════════════════════════════ -->
+<div class="tm-data-section">
+  <div class="tm-container">
+    <div style="text-align:center;margin-bottom:56px">
+      <div class="tm-section-tag" style="color:var(--primary-light)">Impacto turístico</div>
+      <h2 class="tm-section-title" style="color:#fff">El municipio en números</h2>
+    </div>
+    <!-- MUNICIPIO: Actualiza las estadísticas reales -->
+    <div class="tm-data-grid">
+      <div class="tm-reveal">
+        <div class="tm-data-num">10K+</div>
+        <div class="tm-data-lbl">Visitantes<br>digitales al mes</div>
+      </div>
+      <div class="tm-reveal">
+        <div class="tm-data-num">5</div>
+        <div class="tm-data-lbl">Destinos<br>en 360°</div>
+      </div>
+      <div class="tm-reveal">
+        <div class="tm-data-num">8</div>
+        <div class="tm-data-lbl">Eventos<br>anuales</div>
+      </div>
+      <div class="tm-reveal">
+        <div class="tm-data-num">100%</div>
+        <div class="tm-data-lbl">Contenido<br>auténtico</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     PARALLAX FINAL
+══════════════════════════════════════════════════════ -->
+<div class="tm-parallax">
+  <div class="tm-parallax-bg" style="background-image:url('mercado.webp')"></div>
+  <div class="tm-parallax-overlay"></div>
+  <div class="tm-parallax-text">
+    <blockquote>"Cosoleacaque no se visita, se siente"</blockquote>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECCIÓN 12: CTA / CONTACTO
+══════════════════════════════════════════════════════ -->
+<section class="tm-cta-section">
+  <div class="tm-container">
+    <!-- MUNICIPIO: Personaliza el CTA -->
+    <h2>¿Listo para explorar<br>Cosoleacaque?</h2>
+    <p>Descubre todo lo que este municipio tiene para ofrecer: cultura, gastronomía, artesanías y experiencias inmersivas que no olvidarás.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="mercado360.html" class="tm-btn-primary" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4)">Ver en 360° →</a>
+      <a href="marketplace.html" class="tm-btn-primary">Explorar marketplace</a>
+      <a href="index.html#contacto" class="tm-btn-ghost">Contactar INMERSIAK</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer class="tm-footer">
+  <div class="tm-container">
+    <div class="tm-footer-inner">
+      <!-- MUNICIPIO: Cambia el nombre del municipio -->
+      <div class="tm-footer-logo">Cosoleacaque · Veracruz</div>
+      <div class="tm-footer-links">
+        <a href="#historia">Historia</a>
+        <a href="#lugares">Lugares</a>
+        <a href="#gastronomia">Gastronomía</a>
+        <a href="#artesanos">Artesanos</a>
+        <a href="#360">360°</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="index.html">INMERSIAK</a>
+      </div>
+    </div>
+    <div class="tm-footer-bottom">
+      <!-- MUNICIPIO: Actualiza el año y nombre -->
+      <span>© 2026 Cosoleacaque · Plataforma turística por INMERSIAK</span>
+      <span>Hecho con ♥ en Veracruz, México</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SCROLL REVEAL ── -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.tm-reveal').forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('tm-nav');
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+</script>
+</body>
+</html>

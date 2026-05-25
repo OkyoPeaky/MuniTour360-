@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0D0512">
+  <title>Tour Inmersivo VR — Parque & Rueda · Cosoleacaque</title>
+
+  <!-- Fuentes (mismo set que mercado360 para identidad coherente) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,900&family=DM+Mono:wght@300;400;500&family=Crimson+Pro:ital,wght@0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <!-- A-Frame WebXR -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- Componente para hacer entidades clicables con cursor/mando -->
+  <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+
+  <link rel="stylesheet" href="tour360.css?v=3">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       PANTALLA DE CARGA
+  ═══════════════════════════════════════════════════ -->
+  <div id="boot">
+    <div class="boot-orb"></div>
+    <div class="boot-label">✦ Cosoleacaque · Veracruz ✦</div>
+    <div class="boot-title">Experiencia <em>Inmersiva</em></div>
+    <div class="boot-progress">Cargando · Tour 360°</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       FADE entre escenas
+  ═══════════════════════════════════════════════════ -->
+  <div id="fade"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       HUD SUPERIOR
+  ═══════════════════════════════════════════════════ -->
+  <div id="topbar">
+    <div class="tb-info">
+      <div class="tb-label">Tour 360° · Demo</div>
+      <div class="tb-name">Parque & <em>Rueda</em></div>
+    </div>
+
+    <div class="tb-actions">
+      <a href="mercado360.html?from=tour&dest=rueda" class="tb-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+        <span>Volver al menú</span>
+      </a>
+      <button class="tb-btn primary" id="btn-vr" onclick="enterVR()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h18v10H3z"/><circle cx="8" cy="12" r="1.5" fill="currentColor"/><circle cx="16" cy="12" r="1.5" fill="currentColor"/><path d="M10 12h4"/></svg>
+        <span>Modo VR</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       MINIMAPA (lista de escenas)
+  ═══════════════════════════════════════════════════ -->
+  <div id="minimap">
+    <div class="mm-title">✦ Posiciones</div>
+    <!-- nodos generados por JS -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       HUD INFERIOR — nombre escena
+  ═══════════════════════════════════════════════════ -->
+  <div id="bottombar">
+    <div class="scene-info">
+      <div class="scene-num" id="scene-num">Escena 1 / 2</div>
+      <div class="scene-title" id="scene-title">—</div>
+      <div class="scene-desc" id="scene-desc">—</div>
+    </div>
+
+    <div class="hint">
+      <span class="hint-line">Arrastra · Mirar alrededor</span>
+      <span class="hint-line">Click en círculos · Avanzar</span>
+      <span class="hint-line">Quest 3 · Modo VR disponible</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       TOAST
+  ═══════════════════════════════════════════════════ -->
+  <div id="toast"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       ESCENA A-FRAME (WebXR)
+  ═══════════════════════════════════════════════════ -->
+  <a-scene
+    loading-screen="enabled: false"
+    renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true; highRefreshRate: true; foveationLevel: 1"
+    vr-mode-ui="enabled: false"
+    webxr="optionalFeatures: hand-tracking, local-floor, bounded-floor; referenceSpaceType: local-floor"
+    background="color: #0D0512"
+  >
+
+    <!-- Assets pre-cargados (A-Frame los gestiona correctamente) -->
+    <a-assets timeout="60000">
+      <img id="img-pos1" src="pos1.jpg" crossorigin="anonymous">
+      <img id="img-pos2" src="pos2.jpg" crossorigin="anonymous">
+      <!-- Video 360 — colócalo en Imagenes/360/video-rueda.mp4 -->
+      <video
+        id="vid-rueda"
+        src="video-rueda.mp4"
+        crossorigin="anonymous"
+        playsinline
+        webkit-playsinline
+        preload="auto">
+      </video>
+    </a-assets>
+
+    <!-- ── SKY: panorama equirectangular ── -->
+    <a-sky id="sky" src="" rotation="0 0 0"></a-sky>
+
+    <!-- ── VIDEOSPHERE: video 360 (oculto por defecto) ── -->
+    <a-videosphere id="videosky" src="" rotation="0 0 0" visible="false"></a-videosphere>
+
+    <!-- ── Contenedor de hotspots/infospots (poblado por JS) ── -->
+    <a-entity id="spots"></a-entity>
+
+    <!-- ── CONTROLES DE VIDEO 3D (visibles solo en escenas de video) ── -->
+    <a-entity id="video-controls" visible="false" position="0 -1.2 -2.5">
+
+      <!-- Botón Play/Pause -->
+      <a-entity id="btn-playpause" class="clickable video-ctrl" position="-0.7 0 0">
+        <a-circle radius="0.22" color="#0D0512" opacity="0.92" material="shader: flat"></a-circle>
+        <a-circle radius="0.24" color="#E0136C" opacity="0.6" material="shader: flat; side: double" position="0 0 -0.001"></a-circle>
+        <!-- Ícono play (triángulo) -->
+        <a-entity id="icon-play" position="0 0 0.01">
+          <a-triangle
+            color="#EAE8F5"
+            material="shader: flat"
+            vertex-a="-0.06 0.09 0"
+            vertex-b="-0.06 -0.09 0"
+            vertex-c="0.10 0 0">
+          </a-triangle>
+        </a-entity>
+        <!-- Ícono pausa (dos barras) - oculto inicialmente -->
+        <a-entity id="icon-pause" visible="false" position="0 0 0.01">
+          <a-plane width="0.04" height="0.16" color="#EAE8F5" material="shader: flat" position="-0.045 0 0"></a-plane>
+          <a-plane width="0.04" height="0.16" color="#EAE8F5" material="shader: flat" position="0.045 0 0"></a-plane>
+        </a-entity>
+        <!-- Label -->
+        <a-text value="PLAY / PAUSA" align="center" color="#9B96C4" position="0 -0.35 0" width="2.2" font="mozillavr"></a-text>
+      </a-entity>
+
+      <!-- Botón Volver -->
+      <a-entity id="btn-back" class="clickable video-ctrl" position="0.7 0 0">
+        <a-circle radius="0.22" color="#0D0512" opacity="0.92" material="shader: flat"></a-circle>
+        <a-circle radius="0.24" color="#D4A256" opacity="0.6" material="shader: flat; side: double" position="0 0 -0.001"></a-circle>
+        <!-- Ícono flecha izquierda -->
+        <a-entity position="0 0 0.01">
+          <a-triangle
+            color="#EAE8F5"
+            material="shader: flat"
+            vertex-a="0.06 0.09 0"
+            vertex-b="0.06 -0.09 0"
+            vertex-c="-0.10 0 0">
+          </a-triangle>
+        </a-entity>
+        <a-text value="VOLVER" align="center" color="#9B96C4" position="0 -0.35 0" width="2.2" font="mozillavr"></a-text>
+      </a-entity>
+
+      <!-- Barra de progreso -->
+      <a-entity id="progress-bar" position="0 -0.7 0">
+        <a-plane width="2.2" height="0.04" color="#1A0A2E" material="shader: flat" opacity="0.9"></a-plane>
+        <a-plane id="progress-fill" width="0" height="0.04" color="#E0136C" material="shader: flat" position="-1.1 0 0.001"></a-plane>
+      </a-entity>
+
+    </a-entity>
+
+    <!-- ── CÁMARA ── -->
+    <a-entity id="rig" position="0 1.6 0">
+      <a-camera
+        look-controls="reverseMouseDrag: false; touchEnabled: true; magicWindowTrackingEnabled: true; pointerLockEnabled: false"
+        wasd-controls-enabled="false"
+        position="0 0 0"
+      >
+        <!-- Cursor para VR (controles de cabeza/mando). En desktop, los clicks se manejan con raycast manual desde JS -->
+        <a-entity
+          cursor="rayOrigin: entity; fuse: false"
+          position="0 0 -2"
+          raycaster="objects: .clickable; far: 50"
+          visible="false"
+        ></a-entity>
+
+        <!-- Esfera de fade alrededor de la cámara: funciona en desktop Y en VR -->
+        <a-sphere
+          id="fade3d"
+          radius="0.5"
+          segments-width="16"
+          segments-height="16"
+          material="color: #0D0512; side: back; transparent: true; opacity: 0; shader: flat; depthWrite: false"
+          visible="false"
+        ></a-sphere>
+      </a-camera>
+    </a-entity>
+
+    <!-- ── Controles de Meta Quest (mandos derecho e izquierdo) ── -->
+    <a-entity
+      id="leftHand"
+      laser-controls="hand: left"
+      raycaster="objects: .clickable; far: 25; lineColor: #E0136C; lineOpacity: 0.7"
+    ></a-entity>
+
+    <a-entity
+      id="rightHand"
+      laser-controls="hand: right"
+      raycaster="objects: .clickable; far: 25; lineColor: #F24D95; lineOpacity: 0.8"
+    ></a-entity>
+
+    <!-- ── Iluminación ambiente sutil ── -->
+    <a-entity light="type: ambient; intensity: 1.0; color: #ffffff"></a-entity>
+
+  </a-scene>
+
+  <!-- ═══════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════ -->
+  <script src="tour360.js?v=3"></script>
+
+  <script>
+    // Función para entrar a VR desde botón custom
+    function enterVR() {
+      const scene = document.querySelector('a-scene');
+      if (scene.is('vr-mode')) {
+        scene.exitVR();
+      } else {
+        scene.enterVR();
+      }
+    }
+
+    // Eliminar agresivamente el botón VR de A-Frame y el cursor "grab" del canvas
+    function limpiarUIAFrame() {
+      // Quitar botones VR/AR nativos
+      document.querySelectorAll('.a-enter-vr, .a-enter-ar, .a-orientation-modal').forEach(el => {
+        el.remove();
+      });
+
+      // Quitar la clase a-grab-cursor del canvas (es lo que hace ver la "manita")
+      const canvas = document.querySelector('.a-canvas');
+      if (canvas) {
+        canvas.classList.remove('a-grab-cursor', 'a-grabbing-cursor');
+        canvas.style.cursor = 'default';
+      }
+    }
+
+    // Ejecutar limpieza varias veces porque A-Frame los re-inyecta
+    window.addEventListener('load', () => {
+      limpiarUIAFrame();
+      setTimeout(limpiarUIAFrame, 500);
+      setTimeout(limpiarUIAFrame, 1500);
+      setTimeout(limpiarUIAFrame, 3000);
+    });
+
+    // Observer para eliminar cualquier reinyección futura
+    const observer = new MutationObserver(() => limpiarUIAFrame());
+    document.addEventListener('DOMContentLoaded', () => {
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+
+</body>
+</html>

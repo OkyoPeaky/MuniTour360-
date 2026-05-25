@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Experiencia 360° — Cosoleacaque</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Mono:wght@300;400&family=Crimson+Pro:ital,wght@0,400;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="mercado360.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════
+       SELECTOR DE AVENTURA
+  ═══════════════════════════════════ -->
+  <div id="selector">
+    <div class="sel-bg">
+      <div class="sel-orb sel-orb-1"></div>
+      <div class="sel-orb sel-orb-2"></div>
+      <div class="sel-orb sel-orb-3"></div>
+    </div>
+
+    <div class="sel-nav">
+      <a href="munitour360.html" class="sel-back">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+        Volver
+      </a>
+      <div class="sel-badge">✦ Cosoleacaque · Veracruz · México ✦</div>
+    </div>
+
+    <div class="sel-header">
+      <p class="sel-label"><i class="section-icon icon-360"></i> Experiencia Inmersiva</p>
+      <h1 class="sel-title">Experiencia <em>360°</em><span class="sel-colon">:</span></h1>
+      <p class="sel-subtitle">Elige tu <em>aventura</em></p>
+      <p class="sel-desc">Camina libremente por los espacios más icónicos de Cosoleacaque desde cualquier parte del mundo</p>
+    </div>
+
+    <div class="carousel-wrap">
+      <button class="car-arrow car-arrow-l" id="carPrev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
+      <div class="car-stage" id="carStage"></div>
+      <button class="car-arrow car-arrow-r" id="carNext">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+    </div>
+
+    <div class="car-dots" id="carDots"></div>
+    <div class="tband"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       PANTALLA DE CARGA
+  ═══════════════════════════════════ -->
+  <div id="loading" class="hide">
+    <div class="lring"></div>
+    <div class="ltxt" id="ltxt">Cargando destino…</div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       VISOR 360°
+  ═══════════════════════════════════ -->
+  <div id="viewer360" class="v-hidden">
+    <canvas id="c"></canvas>
+    <div id="fade"></div>
+    <div id="vig"></div>
+    <div id="nav-layer"></div>
+
+    <div id="topbar">
+      <div class="tb-l">
+        <div class="tb-dest" id="tb-dest"></div>
+        <div id="node-info">—</div>
+      </div>
+    </div>
+
+    <!-- Botón volver al menú — esquina superior derecha -->
+    <button id="btn-menu" onclick="volverAlSelector()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15,18 9,12 15,6"/></svg>
+      Menú
+    </button>
+
+    <button id="btn-cart" onclick="toggleCart()"><span id="cqty">0</span></button>
+
+    <div id="hint">Arrastra para mirar · Círculos en el suelo para avanzar</div>
+
+    <div id="minimap">
+      <div class="mm-title" id="mm-title">✦ Mapa</div>
+      <div class="mm-nodes" id="mm-nodes"></div>
+    </div>
+
+    <div id="panel">
+      <button id="pcl" onclick="closePanel()">✕</button>
+      <div class="ph"><span id="pemoji"></span><div class="pbadge" id="pbadge"></div></div>
+      <div class="pb">
+        <div class="pcat"  id="pcat"></div>
+        <div class="pname" id="pname"></div>
+        <div class="pdesc" id="pdesc"></div>
+        <div class="pgal"  id="pgal"></div>
+        <div class="psec"  id="psec"></div>
+        <div id="pprods"></div>
+      </div>
+      <div class="pfoot" id="pfoot"></div>
+    </div>
+
+    <div id="mCart">
+      <div class="cbox">
+        <div class="chd">
+          <div class="cht">Tu canasta</div>
+          <button class="chx" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="clist" id="clist"></div>
+        <div class="cft">
+          <div class="ctr"><span>Subtotal</span><span id="csub">$0 MXN</span></div>
+          <div class="ctr"><span>Envío DHL estimado</span><span>Al pagar</span></div>
+          <div class="ctr big"><span>Total</span><span id="ctot">$0 MXN</span></div>
+          <button class="bpay" onclick="checkout()">Pagar · Envío mundial</button>
+          <div class="dhl">Envíos via DHL Express desde Cosoleacaque, Ver.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast"></div>
+    <div class="tband"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="mercado360.js"></script>
+</body>
+</html>

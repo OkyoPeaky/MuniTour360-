@@ -1,0 +1,1284 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Cosoleacaque — Alma del Sur de Veracruz</title>
+
+  <!-- ── Open Graph / Social Sharing ── -->
+  <meta name="description" content="Descubre Cosoleacaque, municipio del sur de Veracruz: su cultura olmeca, gastronomía tradicional, artesanías, son jarocho y paisajes naturales.">
+  <meta property="og:title"       content="Cosoleacaque — Alma del Sur de Veracruz">
+  <meta property="og:description" content="Descubre la cultura, gastronomía, artesanías y tradiciones de Cosoleacaque, Veracruz.">
+  <meta property="og:image"       content="Parque.jpg">
+  <meta property="og:type"        content="website">
+  <meta property="og:locale"      content="es_MX">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="Cosoleacaque — Alma del Sur de Veracruz">
+  <meta name="twitter:description" content="Descubre la cultura, gastronomía y tradiciones de Cosoleacaque, Veracruz.">
+  <meta name="twitter:image"      content="Parque.jpg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles2.css">
+  <link rel="stylesheet" href="incentivos.css">
+  <link rel="stylesheet" href="extras.css">
+  <link rel="stylesheet" href="fixes.css">
+  <!-- Leaflet.js — mapa interactivo -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <!-- Altura aumentada para las fotos de lugares emblemáticos -->
+  <style>
+    .card-img-lugar {
+      height: 240px;
+      object-position: center;
+    }
+    @media (max-width: 600px) {
+      .card-img-lugar { height: 200px; }
+    }
+    /* Imagen para las features de gastronomía (reemplaza al gastro-emoji) */
+    .gastro-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid rgba(224, 19, 108, 0.4);
+      box-shadow: 0 8px 32px rgba(181, 15, 87, 0.2);
+      display: block;
+    }
+    @media (max-width: 700px) {
+      .gastro-img { height: 220px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-slides">
+      <!-- Slide 1: Plaza principal Cosoleacaque -->
+      <div class="hero-slide active"
+        style="background-image:url('Parque.jpg')">   
+      </div>
+      <!-- Slide 2: Iglesia Cosoleacaque -->
+      <div class="hero-slide"
+        style="background-image:url('Iglesia.jpg')">
+      </div>
+      <!-- Slide 3: choca -->
+      <div class="hero-slide"
+        style="background-image:url('choca.jpg')">
+      </div>
+      <!-- Slide 4: Mercado  -->
+      <div class="hero-slide"
+        style="background-image:url('mercado.webp')">
+      </div>
+      <!-- Slide 5: Gente del sur de Veracruz -->
+      <div class="hero-slide"
+        style="background-image:url('Rueda.png')">
+      </div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-pattern"></div>
+    <p class="hero-badge">Sur de Veracruz · México</p>
+    <h1><span class="hero-white">Cosolea</span><span>caque</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Vive Cosoleacaque</p>
+    <p class="hero-state">Municipio del Estado de Veracruz · Región Olmeca</p>
+
+    <!-- Bloque inferior fijo: caption dinámica + dots + botón Explorar -->
+    <div class="hero-bottom">
+      <!-- El caption dinámico de main.js se inyecta aquí -->
+      <div id="hero-caption-slot" class="hero-caption-slot"></div>
+      <div class="hero-dots" id="heroDots"></div>
+      <button class="scroll-hint" id="scroll-hint-btn" aria-label="Desplazarse a la siguiente sección">
+        <span>Explorar</span>
+        <div class="scroll-arrow-circle">
+          <svg class="scroll-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="textile-band"></div>
+
+<!-- ── NAV ── -->
+  <nav id="main-nav">
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="#intro"><i class="nav-icon icon-inicio"></i> Inicio</a>
+      <a href="#mapa-rutas"><i class="nav-icon icon-turismo"></i> Mapa</a>
+      <a href="#cultura"><i class="nav-icon icon-cultura"></i> Cultura</a>
+      <a href="#mercado"><i class="nav-icon icon-360"></i> 360°</a>
+      <a href="#textiles"><i class="nav-icon icon-textiles"></i> Textiles</a>
+      <a href="#danza"><i class="nav-icon icon-musica"></i> Danza</a>
+      <a href="#gastronomia"><i class="nav-icon icon-gastronomia"></i> Gastronomía</a>
+      <a href="#turismo"><i class="nav-icon icon-turismo"></i> Turismo</a>
+      <a href="#lealtad"><i class="nav-icon icon-lealtad"></i> Lealtad</a>
+      <a href="#merch-preview"><i class="nav-icon icon-merch"></i> Artesanos</a>
+    </div>
+  </nav>
+
+  <!-- ── PANEL MÓVIL IZQUIERDO — munitour360 ── -->
+  <div id="muni-panel" aria-hidden="true">
+    <a href="#intro"><i class="nav-icon icon-inicio"></i> Inicio</a>
+    <a href="#mapa-rutas"><i class="nav-icon icon-turismo"></i> Mapa</a>
+    <a href="#cultura"><i class="nav-icon icon-cultura"></i> Cultura</a>
+    <a href="#mercado"><i class="nav-icon icon-360"></i> 360°</a>
+    <a href="#textiles"><i class="nav-icon icon-textiles"></i> Textiles</a>
+    <a href="#danza"><i class="nav-icon icon-musica"></i> Danza & Música</a>
+    <a href="#gastronomia"><i class="nav-icon icon-gastronomia"></i> Gastronomía</a>
+    <a href="#turismo"><i class="nav-icon icon-turismo"></i> Turismo</a>
+    <a href="#lealtad"><i class="nav-icon icon-lealtad"></i> Lealtad</a>
+    <a href="#merch-preview"><i class="nav-icon icon-merch"></i> Artesanos</a>
+  </div>
+  <div id="muni-overlay"></div>
+
+  <!-- ── INTRO ── -->
+  <section id="intro" class="reveal">
+    <p class="section-label"><i class="section-icon icon-inicio"></i> Quiénes somos</p>
+    <h2 class="section-title">Cosolea<em>caque</em></h2>
+    <div class="intro-grid">
+      <div class="intro-text">
+        <p>Cosoleacaque es un municipio del sur de Veracruz cuyo nombre lleva impresa su propia historia: del náhuatl
+          <em>Cozolteacaque</em>, que significa <em>"lugar donde abundan las coyules"</em>, en referencia a las palmeras
+          que alguna vez cubrieron estas tierras tropicales. Ese vínculo con la naturaleza no es solo etimológico;
+          es una forma de ser que se mantiene viva en su gente.</p>
+
+        <p>Enclavado entre ríos, humedales y selvas del trópico húmedo veracruzano, el municipio guarda una identidad
+          cultural profunda, moldeada a lo largo de siglos por la herencia olmeca, la lengua y cosmovisión nahua,
+          y el mestizaje jarocho que le da su carácter particular. Aquí la historia no está solo en los libros:
+          está en las manos de las artesanas, en las voces de los trovadores y en el olor a copal de las capillas.</p>
+
+        <p>Las tradiciones siguen siendo el tejido vivo de Cosoleacaque. La milpa, el son jarocho, los fandangos
+          comunitarios y las fiestas patronales no son reliquias del pasado: son el pulso cotidiano de un pueblo que
+          celebra su origen con orgullo y generosidad.</p>
+        <div class="tags">
+          <span class="tag">Región Olmeca</span>
+          <span class="tag">Sur Veracruz</span>
+          <span class="tag">Zona Náhuatl</span>
+          <span class="tag">Cultura Jarocha</span>
+        </div>
+      </div>
+      <div class="intro-stats">
+        <div class="stat-card">
+          <div class="stat-num">~75k</div>
+          <div class="stat-label">Habitantes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">18°C</div>
+          <div class="stat-label">Temp. promedio</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1561</div>
+          <div class="stat-label">Fundación aprox.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Sur</div>
+          <div class="stat-label">Región Veracruz</div>
+        </div>
+
+        <iframe
+          data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8843.464022228904!2d-94.64121613400017!3d17.998934557706633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85e989e426551ea7%3A0xa264266bfbd87c74!2sCosoleacaque%2C%20Ver.!5e0!3m2!1ses-419!2smx!4v1772652484831!5m2!1ses-419!2smx"
+          src="about:blank"
+          width="400" height="250" style="border:0;" allowfullscreen
+          loading="lazy" title="Mapa de Cosoleacaque, Veracruz"
+          class="lazy-iframe"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MAPA INTERACTIVO ── -->
+  <section id="mapa-rutas">
+    <div class="mapa-header">
+      <span class="mapa-tag">Rutas y puntos estratégicos</span>
+      <h2>Explora el municipio</h2>
+      <p>Selecciona un punto en el mapa para conocer el lugar, su historia y cómo llegar desde tu ubicación.</p>
+    </div>
+
+    <div class="mapa-layout">
+      <!-- Mapa Leaflet -->
+      <div class="mapa-leaflet-wrap">
+        <div id="mapa-leaflet"></div>
+        <!-- Overlay: Mi ubicación -->
+        <button class="mapa-mi-ubicacion" id="mapa-mi-ubicacion" title="Ver mi ubicación en el mapa">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="9" opacity=".25"/>
+          </svg>
+          Mi ubicación
+        </button>
+        <!-- Overlay: leyenda -->
+        <div class="mapa-leyenda">
+          <div class="mapa-leyenda-item active">
+            <div class="mapa-leyenda-dot" style="background:var(--magenta)"></div>
+            Puntos estratégicos
+          </div>
+          <div class="mapa-leyenda-item">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 8C8 10 5.9 16.2 3.2 21.4A1 1 0 0 0 4 23h1a2 2 0 0 0 1.8-1.2A15.9 15.9 0 0 1 12 14c1.9 1.6 3.1 4.5 3.7 8a1 1 0 0 0 1 .8l.5-.1c.7-.3 1-1 .8-1.7-1.2-5.1-3.4-9.2-7-11a13 13 0 0 1 6 0c.6.2 1.3-.1 1.5-.7l.1-.6c.2-.6-.2-1.2-.8-1.4A15 15 0 0 0 17 8Z"/></svg>
+            Parques
+          </div>
+          <div class="mapa-leyenda-item">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 22V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16M2 22h20M10 14v4M14 14v4M10 10h4"/></svg>
+            Religioso
+          </div>
+          <div class="mapa-leyenda-item">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+            Deportivo
+          </div>
+          <div class="mapa-leyenda-item">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="10" width="18" height="12" rx="1"/><path d="M3 10l9-7 9 7"/></svg>
+            Cultural
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel lateral -->
+      <div class="mapa-panel" id="mapa-panel">
+        <div class="mapa-panel-empty" id="mapa-panel-empty">
+          <div class="mapa-panel-empty-rule"></div>
+          <p>Selecciona un punto en el mapa para ver la información del lugar.</p>
+        </div>
+        <div class="mapa-panel-content" id="mapa-panel-content">
+          <div class="mapa-panel-num" id="mapa-panel-num">01</div>
+          <h3 id="mapa-panel-title">—</h3>
+          <div class="mapa-panel-location">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span id="mapa-panel-address">—</span>
+          </div>
+          <div class="mapa-panel-hr"></div>
+          <p id="mapa-panel-desc">—</p>
+          <div class="mapa-meta">
+            <div class="mapa-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div class="mapa-meta-texts">
+                <span class="mapa-meta-label">Horario</span>
+                <span class="mapa-meta-value" id="mapa-panel-horario">—</span>
+              </div>
+            </div>
+            <div class="mapa-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <div class="mapa-meta-texts">
+                <span class="mapa-meta-label">Categoría</span>
+                <span class="mapa-meta-value" id="mapa-panel-cat">—</span>
+              </div>
+            </div>
+            <div class="mapa-meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+              <div class="mapa-meta-texts">
+                <span class="mapa-meta-label">Cómo llegar</span>
+                <span class="mapa-meta-value" id="mapa-panel-howto">—</span>
+              </div>
+            </div>
+          </div>
+          <!-- Enrutamiento en tiempo real -->
+          <div class="mapa-panel-footer" id="mapa-panel-footer">
+            <button class="mapa-btn-ruta" id="mapa-btn-ruta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 15 14"/>
+              </svg>
+              Cómo llegar
+            </button>
+            <div class="mapa-ruta-info" id="mapa-ruta-info">
+              <div class="mapa-ruta-badge">
+                <span class="mapa-ruta-badge-item" id="mapa-ruta-dist">—</span>
+                <span class="mapa-ruta-sep">·</span>
+                <span class="mapa-ruta-badge-item" id="mapa-ruta-time">—</span>
+              </div>
+              <div class="mapa-ruta-row">
+                <a href="#" id="mapa-btn-gmaps" class="mapa-btn-gmaps-link" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Google Maps
+                </a>
+                <button class="mapa-btn-cancelar" id="mapa-btn-cancelar">Cancelar ruta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de puntos -->
+    <div class="mapa-puntos" id="mapa-puntos">
+      <button class="mapa-punto-btn" data-idx="0">
+        <span class="mapa-punto-num">01</span>
+        <span class="mapa-punto-name">Mercado Municipal</span>
+      </button>
+      <button class="mapa-punto-btn" data-idx="1">
+        <span class="mapa-punto-num">02</span>
+        <span class="mapa-punto-name">Parque Central</span>
+      </button>
+      <button class="mapa-punto-btn" data-idx="2">
+        <span class="mapa-punto-num">03</span>
+        <span class="mapa-punto-name">Parroquia San Juan Bautista</span>
+      </button>
+      <button class="mapa-punto-btn" data-idx="3">
+        <span class="mapa-punto-num">04</span>
+        <span class="mapa-punto-name">Centro Deportivo La Choca</span>
+      </button>
+      <button class="mapa-punto-btn" data-idx="4">
+        <span class="mapa-punto-num">05</span>
+        <span class="mapa-punto-name">Casa de la Cultura</span>
+      </button>
+    </div>
+  </section>
+
+  <hr class="sec-divider">
+  <!-- ── CULTURA ── -->
+  <section id="cultura" class="reveal">
+    <p class="section-label"><i class="section-icon icon-cultura"></i> Identidad y tradición</p>
+    <h2 class="section-title">Cultura <em>viva</em></h2>
+
+    <div class="cards-grid cards-2col">
+
+      <div class="card">
+        <img src="https://cdn.milenio.com/uploads/media/2020/01/26/cabezas-olmecas-shutterstock_0_26_798_497.jpg"
+          alt="Cabezas colosales olmecas, patrimonio de la civilización madre de Mesoamérica" class="card-img">
+        <div class="card-body">
+          <div class="card-title">Raíces Olmecas</div>
+          <div class="card-text">El territorio cosoleacaquense forma parte del gran corredor cultural olmeca,
+            considerada la civilización madre de Mesoamérica. Esa presencia no desapareció con el tiempo:
+            sobrevive en la toponimia náhuatl, en las formas de la cerámica local y en una memoria colectiva
+            que reconoce sus orígenes con naturalidad y orgullo.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img
+          src="Fiesta patronales.png"
+          alt="Fiestas Patronales" class="card-img">
+        <div class="card-body">
+          <div class="card-title">Fiestas Patronales</div>
+          <div class="card-text">Cuando llegan las fiestas del Santo Patrón, Cosoleacaque se transforma.
+            Las comunidades se reúnen en torno a misas, procesiones con velas y flores, jaripeos, feria y
+            fandangos que duran hasta el amanecer. Las celebraciones de mayo y noviembre son las más sentidas,
+            con altares rebosantes de cempasúchil, copal y devoción compartida.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="PAN.png"
+          alt="Pan Tradicional de Cosoleacaque" class="card-img">
+        <div class="card-body">
+          <div class="card-title">Pan Tradicional</div>
+          <div class="card-text">Las panaderías de Cosoleacaque son parte del paisaje cotidiano del municipio.
+            El pan de muerto, las roscas de Reyes y las piezas de temporada horneadas con recetas familiares
+            llenan de aroma los mercados y las calles del centro. Cada pan es una excusa para reunirse:
+            en el velorio, en la fiesta, en el desayuno del domingo con chocolate de agua.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="Iglesia fuera.jpg"
+          alt="Cultura religiosa" class="card-img">
+        <div class="card-body">
+          <div class="card-title">Fe y Raíz</div>
+          <div class="card-text">La vida espiritual de Cosoleacaque no se entiende solo desde el catolicismo:
+            es una fe popular teñida de memoria prehispánica. Las ofrendas de copal, los altares con flores de
+            temporada y la veneración de cruces en ceibas centenarias hablan de una religiosidad que supo
+            fusionarse sin perder su alma propia.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider">
+
+  <!-- ── PARALLAX 1: Parque / Iglesia ── -->
+  <div class="parallax-banner" style="background-image: url('Parque.jpg');">
+    <div class="parallax-banner-content">
+      <span class="parallax-label">Cosoleacaque, Veracruz</span>
+      <h3>Tierra de palmeras<br>y memoria viva</h3>
+      <p>Un pueblo cuya historia se camina, se huele y se celebra cada día.</p>
+    </div>
+  </div>
+
+  <!-- ── RECORRE COSOLEACAQUE 360° ── -->
+  <section id="mercado" class="reveal">
+    <p class="section-label"><i class="section-icon icon-360"></i> Experiencia inmersiva</p>
+    <h2 class="section-title">Recorre <em>Cosoleacaque</em></h2>
+    <p style="max-width:650px; color:#4a3020; margin-bottom:2rem;">Cosoleacaque tiene rincones que merecen
+      verse de cerca. Desde el bullicio del mercado hasta la quietud del parque central, cada espacio
+      cuenta una historia distinta del mismo pueblo. Explóralos en 360° desde donde estés.</p>
+
+    <div class="mercado-banner">
+      <div class="mercado-banner-text">
+        <p>Camina virtualmente por los lugares más queridos del municipio: el mercado con sus aromas y
+          colores, el parque central donde se reúne la vida cotidiana, la parroquia de San Juan Bautista,
+          el centro deportivo y la rueda de la fortuna que anima las noches de feria. Cosoleacaque
+          te espera, sin importar desde dónde lo hagas.</p>
+        <div class="mercado-feats">
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Vista 360° real</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg> Navegación libre</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Compra en línea</span>
+          <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.45a2 2 0 0 1 1.09-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Envío DHL mundial</span>
+        </div>
+        <a href="mercado360.html" class="mercado-btn">▶ Entrar a la experiencia 360°</a>
+      </div>
+      <div class="mercado-preview">
+        <div class="mercado-preview-inner">
+          <div class="mp-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="mp-label">Cosoleacaque<br><em>Veracruz, México</em></div>
+          <div class="mp-pulse"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-grid" style="margin-top:2.5rem;">
+      <div class="card">
+        <img src="mercadomuni.jpg"
+          alt="Mercado Municipal de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Mercado Municipal</div>
+          <div class="card-text">El corazón económico y social del municipio. Puestos de frutas tropicales,
+            hierbas de monte, tamales de chipilín, artesanías y el popo recién preparado. Un espacio que
+            huele, suena y se vive como Cosoleacaque en estado puro.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="parquece.jpg"
+          alt="Parque Central de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Parque Central</div>
+          <div class="card-text">El punto de encuentro por excelencia del pueblo. Familias, ancianos,
+            estudiantes y vendedores ambulantes comparten un mismo espacio verde donde el tiempo transcurre
+            a otro ritmo. Las tardes en el parque son parte del alma de Cosoleacaque.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="parrope.jpg"
+          alt="Parroquia de San Juan Bautista" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Parroquia de San Juan Bautista</div>
+          <div class="card-text">Frente al parque central, la parroquia es testigo de bautizos, bodas,
+            primeras comuniones y fiestas patronales. Su atrio es escenario de procesiones y su fachada,
+            punto de referencia para todo cosoleacaquense que regresa al pueblo.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="centrod.jpg"
+          alt="Centro Deportivo de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Centro Deportivo</div>
+          <div class="card-text">Espacio de convivencia y actividad comunitaria donde el deporte reúne
+            a niños, jóvenes y adultos del municipio. Canchas, áreas recreativas y torneos locales
+            que forman parte de la vida cotidiana y la identidad barrial de Cosoleacaque.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="ruedapepe.jpg"
+          alt="Rueda de la Fortuna de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Rueda de la Fortuna</div>
+          <div class="card-text">Símbolo de las noches de feria y festividades patronales, la rueda de
+            la fortuna ilumina el cielo de Cosoleacaque con sus luces giratorias. Sube y contempla el
+            pueblo desde arriba: una vista que los locales conocen bien y los visitantes no olvidan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider">
+
+  <!-- ── TEXTILES ── -->
+  <div class="dark-section" id="textiles">
+    <div class="dark-inner reveal">
+      <p class="section-label"><i class="section-icon icon-textiles"></i> Arte en tela y fibra</p>
+      <h2 class="section-title">Textiles & <em>Artesanías</em></h2>
+      <p style="color:rgba(250,243,224,0.8); max-width:650px; margin-bottom:2rem;">Las manos de Cosoleacaque
+        cuentan historias. La tradición artesanal del municipio nació del entorno que lo rodea: palmas coyul,
+        semillas de monte, fibras tropicales y barro del suelo húmedo que lo sostiene. Son oficios que se
+        aprenden en casa, se venden en el mercado y se lucen en las fiestas.</p>
+      <div class="cards-grid">
+        <div class="card">
+          <img src="bordadop.jpg"
+            alt="Bordado en Punto de Cruz de Cosoleacaque" class="card-img card-img-lugar">
+          <div class="card-body">
+            <div class="card-title">Bordado en Punto de Cruz</div>
+            <div class="card-text">Manteles, blusas y servilletas bordados a mano con motivos de flores
+              silvestres y animales de la selva. El rojo, el verde y el amarillo dominan una paleta que
+              habla del trópico y de las mujeres artesanas que lo interpretan con aguja e hilo.</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="vestidoman.webp"
+            alt="Ropa de Manta Bordada de Cosoleacaque" class="card-img card-img-lugar">
+          <div class="card-body">
+            <div class="card-title">Ropa de Manta Bordada</div>
+            <div class="card-text">En Cosoleacaque, la manta bordada a mano es la tela de las fiestas y de
+              los días especiales. Blusas y vestidos con figuras de flores tropicales, chachalacas y mariposas
+              elaborados por mujeres del municipio que aprendieron el oficio en el seno familiar y hoy lo
+              ofrecen en el mercado local.</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="palmaaa.jpg"
+            alt="Petate y Palma artesanía de Cosoleacaque" class="card-img card-img-lugar">
+          <div class="card-body">
+            <div class="card-title">Petate y Palma</div>
+            <div class="card-text">El tejido de palma es una de las artesanías más antiguas del municipio.
+              Cestos, sombreros, tapetes y abanicos nacen de manos expertas usando palma real de la zona,
+              con técnicas que se remontan al periodo prehispánico y que hoy siguen siendo fuente de sustento
+              y orgullo familiar.</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="barropa.jpg"
+            alt="Figuras de Barro y Palma de Cosoleacaque" class="card-img card-img-lugar">
+          <div class="card-body">
+            <div class="card-title">Figuras de Barro y Palma</div>
+            <div class="card-text">Artesanos locales elaboran figuras decorativas y utensilios domésticos
+              con barro y palma del entorno municipal. Piezas funcionales —comales, recipientes, canastas—
+              que mezclan forma y utilidad, y que se pueden encontrar en el mercado de Cosoleacaque
+              como objetos de uso diario y de regalo.</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="fibras.jpg"
+            alt="Fibras Tropicales de Cosoleacaque" class="card-img card-img-lugar">
+          <div class="card-body">
+            <div class="card-title">Fibras Tropicales</div>
+            <div class="card-text">El henequén, la palma de coyul —que da nombre al municipio— y el tule
+              se transforman en cuerdas, bolsas y sombreros rústicos. Trabajar estas fibras es, de algún modo,
+              honrar el significado original del nombre Cosoleacaque y su vínculo con la tierra.</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="joyas.jpg"
+            alt="Joyería de Semillas de Cosoleacaque" class="card-img card-img-lugar">
+          <div class="card-body">
+            <div class="card-title">Joyería de Semillas</div>
+            <div class="card-text">Collares, pulseras y aretes elaborados con semillas de la selva —ojo de
+              venado, lágrima de San Pedro, corozo— son piezas artesanales únicas. Las mujeres las venden
+              en mercados y fiestas, llevando un pedazo del monte hasta quien las lleva puestas.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── DANZA Y MÚSICA ── -->
+  <section id="danza" class="reveal">
+    <p class="section-label"><i class="section-icon icon-musica"></i> Ritmo y movimiento</p>
+    <h2 class="section-title">Danza & <em>Música</em></h2>
+    <div class="cards-grid">
+      <div class="card">
+        <img src="sonjaro.jpg"
+          alt="Son Jarocho de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Son Jarocho</div>
+          <div class="card-text">El son jarocho late en el corazón de Cosoleacaque. En los fandangos
+            comunitarios, la jarana, el arpa y el requinto se unen al zapateado sobre la tarima para crear
+            una fiesta que no distingue entre músicos y espectadores. Sones como "La Bamba", "El Siquisirí"
+            o "El Toro Zacamandú" son mucho más que canciones: son rituales de encuentro y pertenencia.</div>
+          <div class="tags">
+            <span class="tag">Patrimonio Inmaterial</span>
+            <span class="tag">UNESCO</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="fandango.jpg"
+          alt="El Fandango de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">El Fandango</div>
+          <div class="card-text">El fandango es la reunión del pueblo. No hay escenario ni butacas: todos
+            forman parte. Hombres y mujeres zapatean sobre la tarima de madera mientras el son va y viene,
+            y la comunidad se reconoce a sí misma en el ritmo compartido. Es gozo, identidad y memoria
+            todo al mismo tiempo.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="danzanti.webp"
+          alt="Danza de los Santiagos de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Danza de los Santiagos</div>
+          <div class="card-text">Con trajes de colores vivos, espejos relumbrantes, plumas y espadas de madera,
+            los danzantes de los Santiagos escenifican una batalla ritual que llegó con la Colonia y echó
+            raíces profundas en la devoción popular del municipio. Verlos danzar en las fiestas religiosas
+            es asistir a siglos de historia en movimiento.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="banvien.jpg"
+          alt="Bandas de Viento de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Bandas de Viento</div>
+          <div class="card-text">Las bandas de viento de Cosoleacaque acompañan cada momento importante de
+            la vida del municipio: bautizos, procesiones, jaripeos y ferias patronales. Formadas por
+            músicos locales que aprendieron el oficio de generación en generación, son el sonido reconocible
+            de las calles del pueblo en días de fiesta.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="casacul.jpg"
+          alt="Casa de Cultura de Cosoleacaque" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Casa de Cultura</div>
+          <div class="card-text">La Casa de Cultura de Cosoleacaque es el espacio donde las tradiciones
+            se enseñan y se perpetúan. Aquí se imparten clases de jarana —el instrumento emblemático del
+            son jarocho—, talleres de construcción artesanal del instrumento y clases de danza tradicional
+            veracruzana. Un lugar donde niños y jóvenes aprenden que su identidad tiene nombre, ritmo y forma.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="jarana.jpg"
+          alt="Construcción de la Jarana" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Construcción de la Jarana</div>
+          <div class="card-text">En los talleres de la Casa de Cultura, la jarana no solo se toca: se
+            construye. Los participantes aprenden a elegir la madera, dar forma al cuerpo del instrumento
+            y tensarlo para que cante. Conocer el proceso de fabricación es entender de raíz por qué el
+            son jarocho suena como suena en el sur de Veracruz.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="danvera.jpg"
+          alt="Danza Tradicional Veracruzana" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Danza Tradicional Veracruzana</div>
+          <div class="card-text">Las clases de danza en la Casa de Cultura enseñan los pasos, la postura
+            y el sentido de las danzas del sur veracruzano. Desde el zapateado del fandango hasta las
+            danzas rituales de temporada, los grupos locales participan en festivales regionales llevando
+            el nombre de Cosoleacaque con orgullo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PARALLAX 2: Iglesia / Fiestas ── -->
+  <div class="parallax-banner" style="background-image: url('Iglesia.jpg');">
+    <div class="parallax-banner-content">
+      <span class="parallax-label">Fiestas Patronales</span>
+      <h3>Cuando la música<br>convoca al pueblo</h3>
+      <p>El son jarocho, el fandango y las procesiones llenan de vida las calles de Cosoleacaque.</p>
+    </div>
+  </div>
+
+  <!-- ── QUOTE con parallax ── -->
+  <div class="big-quote">
+    <blockquote>El sur de Veracruz no se ve, se siente: en el olor a hierba santa, en el ritmo de la jarana y en el
+      calor de su gente</blockquote>
+    <cite>— Dicho popular jarocho</cite>
+  </div>
+
+  <!-- ── PARALLAX 3: Mercado ── -->
+  <div class="parallax-banner" style="background-image: url('mercado.webp');">
+    <div class="parallax-banner-content">
+      <span class="parallax-label">Gastronomía del Trópico</span>
+      <h3>Sabores que no<br>se olvidan</h3>
+      <p>El popo, el asquiote, los tamales de chipilín: la cocina de Cosoleacaque es memoria y territorio.</p>
+    </div>
+  </div>
+
+  <!-- ── GASTRONOMÍA ── -->
+  <section id="gastronomia" class="reveal">
+    <p class="section-label"><i class="section-icon icon-gastronomia"></i> Sabores del trópico</p>
+    <h2 class="section-title">Gastronomía <em>tradicional</em></h2>
+
+    <div class="gastro-feature">
+      <img src="popo.webp" alt="El Popo, bebida tradicional de Cosoleacaque" class="gastro-img">
+      <div>
+        <div class="gastro-name">El Popo</div>
+        <p class="gastro-desc">El popo es la bebida más representativa del sur de Veracruz y una presencia
+          infaltable en los mercados y fiestas de Cosoleacaque. Se prepara con cacao criollo de la región,
+          maíz pozolero tostado y agua fresca, batido hasta levantar una espuma densa y aromática que
+          se sirve en jícara o vaso de barro. Su sabor es profundo, ligeramente amargo y completamente
+          propio de estas tierras: quien lo prueba por primera vez entiende que hay bebidas que no
+          necesitan azúcar para ser perfectas.</p>
+      </div>
+    </div>
+
+    <div class="gastro-feature">
+      <img src="Tamalon.webp" alt="Tamales de Chipilín de Cosoleacaque" class="gastro-img">
+      <div>
+        <div class="gastro-name">Tamales de Chipilín</div>
+        <p class="gastro-desc">El chipilín —hierba aromática muy querida en el sur de Veracruz— tiñe la masa
+          de un verde intenso y le da un sabor inconfundible a estos tamales envueltos en hoja de plátano.
+          Rellenos de pollo guisado o frijol negro, son protagonistas en las mesas de fiesta, en el Día de
+          Muertos y en cualquier mañana de mercado que valga la pena.</p>
+      </div>
+    </div>
+
+    <div class="gastro-feature">
+      <img src="axqui.jpg" alt="El Asquiote, quelite tradicional de Cosoleacaque" class="gastro-img">
+      <div>
+        <div class="gastro-name">El Asquiote</div>
+        <p class="gastro-desc">El asquiote es un quelite silvestre que crece en las zonas pantanosas y
+          húmedas propias del territorio de Cosoleacaque. Sus hojas tiernas se guisan con frijoles negros,
+          chile, ajo y epazote en una preparación sencilla y profundamente local que durante generaciones
+          ha sido alimento cotidiano de las familias del municipio. No se consigue en restaurantes de ciudad
+          ni se exporta: el asquiote es de aquí, para quienes conocen el valor de lo que les da su tierra.</p>
+      </div>
+    </div>
+
+    <div class="cards-grid" style="margin-top:1rem;">
+      <div class="card">
+        <img src="enchila.avif"
+          alt="Enchiladas de Mole" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Enchiladas de Mole</div>
+          <div class="card-text">Tortillas bañadas en mole negro, rellenas de pollo deshebrado y terminadas
+            con queso seco desmoronado y cebolla morada. El platillo de domingo por excelencia en los
+            mercados locales, donde el aroma solo llega antes que el plato.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="tostones.jpg"
+          alt="Tostones de Plátano" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Tostones de Plátano</div>
+          <div class="card-text">El plátano macho frito dos veces es el acompañamiento de ley en la cocina
+            cosoleacaquense. Crujiente por fuera, suave por dentro, se sirve con crema espesa, frijoles
+            negros refritos y chile verde. Simple y perfecto.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="camaron.jpg"
+          alt="Camarones a la Diabla" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Camarones a la Diabla</div>
+          <div class="card-text">Camarones frescos cocinados en salsa de chile de árbol tatemado con ajo
+            y tomate. Picante, rojo encendido y adictivo, se sirve con arroz blanco para equilibrar el
+            fuego. El tipo de plato que hace que el calor del trópico se sienta bien.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="pozol.webp"
+          alt="Tejate y Pozol" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Tejate & Pozol</div>
+          <div class="card-text">Bebidas de origen prehispánico que siguen siendo parte de la vida cotidiana.
+            El tejate, frío y espumoso, y el pozol negro, denso y reconfortante, refrescan el cuerpo en las
+            tardes del trópico húmedo con una eficacia que ningún refresco industrializado ha podido superar.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="dulces.jpg"
+          alt="Dulces Artesanales" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Dulces Artesanales</div>
+          <div class="card-text">Coco rallado en almíbar, jamoncillo de pepita y bolas de tamarindo con chile
+            son los dulces que cierran las comidas y endulzan los días de mercado. Se venden en bolsitas de
+            celofán a la salida de la iglesia, y su sabor es pura memoria de infancia para quien creció
+            en el sur de Veracruz.</div>
+        </div>
+      </div>
+      <div class="card">
+        <img src="tepache.webp"
+          alt="Tepache de Jamaica" class="card-img card-img-lugar">
+        <div class="card-body">
+          <div class="card-title">Tepache de Jamaica</div>
+          <div class="card-text">En las fiestas del municipio se prepara este tepache regional: flor de
+            Jamaica fermentada suavemente con piloncillo, canela y un toque de pulque natural. Refrescante,
+            levemente ácido y de color rojo intenso, es la bebida de las reuniones y las tardes largas.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec-divider">
+
+  <!-- ── TURISMO ── -->
+  <section id="turismo" class="reveal">
+    <p class="section-label"><i class="section-icon icon-turismo"></i> Lugares por descubrir</p>
+    <h2 class="section-title">Sitios <em>turísticos</em></h2>
+    <p style="max-width:620px; color:#4a3020; margin-bottom:0.5rem;">Vive Cosoleacaque como nunca antes.
+          Sumérgete en un lugar donde la tradición, la cultura y la calidez de su gente crean experiencias 
+          únicas. Desde sus expresiones artísticas hasta sus sabores y artesanías, aquí cada momento se convierte 
+          en un recuerdo que vale la pena llevar contigo.</p>
+
+    <div class="turismo-list">
+      <div class="lugar">
+        <div class="lugar-num">01</div>
+        <span class="lugar-tag"><i class="content-icon icon-olmeca"></i> Historia</span>
+        <div class="lugar-title">Herencia Olmeca en el Territorio</div>
+        <p class="lugar-desc">La región guarda vestigios de la cultura olmeca, la más antigua de Mesoamérica.
+          Montículos, fragmentos de cerámica y tradición oral forman parte de un patrimonio que guías locales
+          ayudan a interpretar con el conocimiento que solo da crecer en estas tierras.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">02</div>
+        <span class="lugar-tag"><i class="content-icon icon-rio"></i> Naturaleza</span>
+        <div class="lugar-title">Riberas y Paisajes Fluviales</div>
+        <p class="lugar-desc">Los ríos y cuerpos de agua que rodean al municipio son escenarios de una
+          naturaleza generosa. Al amanecer, la niebla sobre el agua y el canto de las aves tropicales
+          transforman cualquier recorrido en lancha en una experiencia difícil de olvidar.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">03</div>
+        <span class="lugar-tag"><i class="content-icon icon-manglar"></i> Ecoturismo</span>
+        <div class="lugar-title">Manglares y Humedales</div>
+        <p class="lugar-desc">Los humedales del entorno de Cosoleacaque albergan una biodiversidad
+          extraordinaria. En kayak o en canoa, es posible observar cocodrilos, pelícanos, garzas y —en
+          temporada— manatíes. Un ecosistema frágil y fascinante que merece recorrerse en silencio y
+          con respeto.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">04</div>
+        <span class="lugar-tag"><i class="content-icon icon-mercado"></i> Cultura</span>
+        <div class="lugar-title">Mercado Municipal</div>
+        <p class="lugar-desc">El mercado de Cosoleacaque es uno de esos espacios donde la vida del pueblo
+          se concentra y se expone sin filtros. Hierbas medicinales, especias, tamales de chipilín, frutas
+          tropicales y artesanías conviven en un espacio que huele, suena y se siente como el alma
+          más auténtica del municipio.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">05</div>
+        <span class="lugar-tag"><i class="content-icon icon-iglesia"></i> Patrimonio</span>
+        <div class="lugar-title">Parroquia de San Juan Bautista</div>
+        <p class="lugar-desc">En el centro histórico del municipio, la parroquia es mucho más que un edificio
+          colonial. Sus retablos barrocos, las figuras de santos populares y el atrio donde se realizan las
+          procesiones patronales hacen de ella un espacio donde arquitectura, fe y memoria comunitaria
+          se funden en una sola experiencia.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">06</div>
+        <span class="lugar-tag"><i class="content-icon icon-rural"></i> Rural</span>
+        <div class="lugar-title">Rancherías y Turismo Vivencial</div>
+        <p class="lugar-desc">Las comunidades rurales del municipio son el destino turístico más honesto
+          que existe: cosechar cacao, aprender a tortear, acompañar una vendimia de plátano o sentarse
+          con una artesana de petate. No hay actuación ni escenografía; solo vida real, compartida
+          con generosidad.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">07</div>
+        <span class="lugar-tag"><i class="content-icon icon-fandango"></i> Festivales</span>
+        <div class="lugar-title">Fandangos y Fiestas Patronales</div>
+        <p class="lugar-desc">Asistir a un fandango comunitario en Cosoleacaque es una de esas experiencias
+          que cambian la forma de entender la música. Las fiestas de mayo y diciembre son las más concurridas:
+          música en vivo desde el anochecer, cohetes que iluminan el cielo, juegos de feria y la gastronomía
+          más rica del municipio al alcance de la mano.</p>
+      </div>
+      <div class="lugar">
+        <div class="lugar-num">08</div>
+        <span class="lugar-tag"><i class="content-icon icon-palma"></i> Naturaleza</span>
+        <div class="lugar-title">Selva y Flora Tropical</div>
+        <p class="lugar-desc">El entorno natural de Cosoleacaque esconde senderos entre palmas coyol —las
+          que le dieron nombre al municipio—, ceibas centenarias y árboles de cacao silvestre. Recorrer
+          estos espacios con un guía local es redescubrir la relación que el pueblo siempre ha tenido
+          con su tierra: una relación de respeto y pertenencia mutua.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="textile-band"></div>
+
+  <!-- ── PARALLAX: Artesanos ── -->
+  <div class="parallax-banner" style="background-image:url('choca.jpg'); height:320px;">
+    <div class="parallax-banner-content">
+      <span class="parallax-label">Hecho a mano en Cosoleacaque</span>
+      <h3>Las manos que<br>cuentan historias</h3>
+      <p>Artesanías únicas elaboradas por los creadores del municipio.</p>
+    </div>
+  </div>
+
+  <hr class="sec-divider">
+
+  <!-- ── LEALTAD / INCENTIVOS ─────────────────────── -->
+  <!-- incentivos.js inyecta #incentivos aquí dinámicamente -->
+  <div id="lealtad-anchor" style="display:none;"></div>
+
+  <hr class="sec-divider">
+
+  <!-- ── ARTESANOS PREVIEW ── -->
+  <section id="artesanos-preview" class="reveal">
+    <p class="section-label"><i class="section-icon icon-artesanos"></i> Apoyo al comercio local</p>
+    <h2 class="section-title">Artesanos de <em>Cosoleacaque</em></h2>
+    <p style="max-width:640px; color:var(--text); margin-bottom:2.5rem;">
+      Detrás de cada pieza artesanal hay un nombre, una historia y años de oficio aprendidos
+      en casa. Conoce a quienes hacen que la identidad del municipio tenga forma tangible.
+    </p>
+    <div class="artisan-prev-grid">
+      <div class="artisan-prev-card wow-card">
+        <div class="artisan-prev-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3V5a3 3 0 0 0-3-3z"/><path d="M9 12h6M9 16h4"/></svg>
+        </div>
+        <div class="artisan-prev-name">Doña Esperanza Méndez</div>
+        <div class="artisan-prev-craft">Bordado · 32 años de oficio</div>
+        <p class="artisan-prev-bio">Sus manteles y blusas llevan motivos de chachalacas y palmeras coyul
+          bordados a mano, tal como aprendió de su abuela nahua a los ocho años.</p>
+      </div>
+      <div class="artisan-prev-card wow-card">
+        <div class="artisan-prev-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div class="artisan-prev-name">Don Aurelio Vázquez</div>
+        <div class="artisan-prev-craft">Palma & Petate · 45 años de oficio</div>
+        <p class="artisan-prev-bio">El mejor tejedor de palma coyul del municipio, cuyas piezas
+          pueden tomar hasta cinco días en completarse usando técnicas de raíz prehispánica.</p>
+      </div>
+      <div class="artisan-prev-card wow-card">
+        <div class="artisan-prev-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </div>
+        <div class="artisan-prev-name">Lucía Torres Ramírez</div>
+        <div class="artisan-prev-craft">Joyería de Semillas · 18 años de oficio</div>
+        <p class="artisan-prev-bio">Collares y aretes únicos elaborados con semillas silvestres del
+          entorno municipal que han llevado el nombre de Cosoleacaque a ferias de todo Veracruz.</p>
+      </div>
+    </div>
+    <a href="artesanos.html" class="merch-see-all">Ver catálogo completo de artesanos →</a>
+  </section>
+
+  <hr class="sec-divider">
+
+  <!-- ── MERCH PREVIEW ── -->
+  <div class="dark-section" id="merch-preview">
+    <div class="dark-inner reveal">
+      <p class="section-label"><i class="section-icon icon-merch"></i> Lleva el municipio contigo</p>
+      <h2 class="section-title">Merch <em>Cosoleacaque</em></h2>
+      <p style="color:rgba(250,243,224,0.8); max-width:600px; margin-bottom:2.5rem;">
+        Ropa, accesorios y recuerdos diseñados con la identidad del municipio.
+        No es souvenirs genérico: es Cosoleacaque hecho objeto.
+      </p>
+      <div class="merch-preview-grid">
+        <div class="merch-prev-card wow-card" onclick="location.href='merch.html'">
+          <div class="merch-prev-img" style="background:linear-gradient(135deg,#3B1060,#E0136C);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>
+          </div>
+          <div class="merch-prev-body">
+            <div class="merch-prev-name">Playera "Cozolteacaque"</div>
+            <div class="merch-prev-price">$320 MXN</div>
+          </div>
+        </div>
+        <div class="merch-prev-card wow-card" onclick="location.href='merch.html'">
+          <div class="merch-prev-img" style="background:linear-gradient(135deg,#4B2080,#9B96C4);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="merch-prev-body">
+            <div class="merch-prev-name">Gorra "Sur de Veracruz"</div>
+            <div class="merch-prev-price">$280 MXN</div>
+          </div>
+        </div>
+        <div class="merch-prev-card wow-card" onclick="location.href='merch.html'">
+          <div class="merch-prev-img" style="background:linear-gradient(135deg,#6B65A0,#E0136C);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>
+          </div>
+          <div class="merch-prev-body">
+            <div class="merch-prev-name">Playera "El Popo"</div>
+            <div class="merch-prev-price">$340 MXN</div>
+          </div>
+        </div>
+        <div class="merch-prev-card wow-card" onclick="location.href='merch.html'">
+          <div class="merch-prev-img" style="background:linear-gradient(135deg,#2d1b00,#b87333);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+          </div>
+          <div class="merch-prev-body">
+            <div class="merch-prev-name">Taza "Cosoleacaque"</div>
+            <div class="merch-prev-price">$190 MXN</div>
+          </div>
+        </div>
+      </div>
+      <a href="merch.html" class="merch-see-all">Ver toda la tienda →</a>
+    </div>
+  </div>
+
+  <div class="textile-band"></div>
+
+  <hr class="sec-divider">
+
+  <div class="textile-band"></div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>COSOLEACAQUE · VERACRUZ · MÉXICO</p>
+    <p style="margin-top:0.5rem;">Cultura · Gastronomía · Naturaleza · Tradición</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem; opacity:0.5;">
+      <a href="artesanos.html"  style="color:inherit; margin:0 0.5rem;">Artesanos</a> ·
+      <a href="merch.html"      style="color:inherit; margin:0 0.5rem;">Merch</a> ·
+      <a href="mercado360.html" style="color:inherit; margin:0 0.5rem;">Mercado 360°</a>
+    </p>
+  </footer>
+
+  <!-- ── SCROLL TO TOP ── -->
+  <button id="scroll-top" aria-label="Regresar arriba">↑</button>
+
+  <!-- ── WHATSAPP FAB ── -->
+  <a href="https://wa.me/527712000000?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20Cosoleacaque"
+     class="whatsapp-fab" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <script src="main.js"></script>
+  <script src="incentivos.js"></script>
+  <script src="extras.js"></script>
+  <script src="mejoras.js"></script>
+
+  <!-- Leaflet.js -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── DATOS ── */
+    var PUNTOS = [
+      {
+        num: '01', nombre: 'Mercado Municipal',
+        lat: 17.9983, lng: -94.6388,
+        address: 'Centro, Cosoleacaque, Ver.',
+        desc: 'Corazón comercial y gastronómico del municipio. Aquí confluyen productores locales, artesanos y la vida cotidiana de Cosoleacaque.',
+        horario: 'Lun - Dom: 6:00 AM - 6:00 PM',
+        categoria: 'Punto Estratégico',
+        howToGet: 'En el centro del municipio, acceso a pie desde cualquier punto del centro histórico.',
+        link360: 'mercado360.html'
+      },
+      {
+        num: '02', nombre: 'Parque Central',
+        lat: 17.9993, lng: -94.6402,
+        address: 'Av. Principal s/n, Cosoleacaque, Ver.',
+        desc: 'Eje de la vida pública del municipio. Concentra celebraciones cívicas, fandangos populares y el encuentro cotidiano de la comunidad.',
+        horario: 'Acceso libre las 24 horas',
+        categoria: 'Parque',
+        howToGet: 'A 3 min a pie del Mercado Municipal.',
+        link360: null
+      },
+      {
+        num: '03', nombre: 'Parroquia San Juan Bautista',
+        lat: 17.9986, lng: -94.6401,
+        address: 'Calle Iglesia, Centro, Cosoleacaque, Ver.',
+        desc: 'Templo patronal que marca el ritmo espiritual del municipio. Las fiestas de mayo y noviembre concentran devoción, música jarocha e historia colonial.',
+        horario: 'Misa: 7:00 AM y 7:00 PM',
+        categoria: 'Religioso',
+        howToGet: 'Frente al Parque Central, a 2 min a pie del Mercado.',
+        link360: null
+      },
+      {
+        num: '04', nombre: 'Centro Deportivo La Choca',
+        lat: 18.0002, lng: -94.6432,
+        address: 'Blvd. La Choca, Cosoleacaque, Ver.',
+        desc: 'Espacio recreativo y deportivo de referencia regional. Alberga eventos comunitarios y actividades que fortalecen el tejido social.',
+        horario: 'Lun - Sáb: 6:00 AM - 9:00 PM',
+        categoria: 'Deportivo',
+        howToGet: 'A 10 min del centro en auto. Tomar Blvd. La Choca hacia el norte.',
+        link360: 'mercado360.html'
+      },
+      {
+        num: '05', nombre: 'Casa de la Cultura',
+        lat: 17.9998, lng: -94.6415,
+        address: 'Calle Cultura s/n, Centro, Cosoleacaque, Ver.',
+        desc: 'Sede de talleres de son jarocho, danza tradicional y artes plásticas que mantienen viva la identidad olmeca-jarocha del municipio.',
+        horario: 'Lun - Vie: 9:00 AM - 7:00 PM',
+        categoria: 'Cultural',
+        howToGet: 'A 5 min a pie del Parque Central.',
+        link360: null
+      }
+    ];
+
+    /* ── INIT MAPA ── */
+    var mapaEl = document.getElementById('mapa-leaflet');
+    if (!mapaEl || typeof L === 'undefined') return;
+
+    var map = L.map('mapa-leaflet', {
+      center: [17.9990, -94.6408],
+      zoom: 15,
+      zoomControl: true,
+      attributionControl: false
+    });
+
+    L.control.attribution({ position: 'bottomright', prefix: false }).addTo(map);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+
+    /* ── ESTADO ── */
+    var activeIdx    = -1;
+    var markers      = [];
+    var rutaLine     = null;
+    var userDot      = null;
+    var rutaActiva   = false;
+
+    /* ── HELPERS ── */
+    function setText(id, val) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = val;
+    }
+
+    function makePin(idx, active) {
+      return L.divIcon({
+        className: '',
+        html: '<div class="mapa-pin-wrap' + (active ? ' active' : '') + '">'
+            + '<div class="mapa-pin-circle">' + PUNTOS[idx].num + '</div>'
+            + '<div class="mapa-pin-tail"></div></div>',
+        iconSize:   [36, 47],
+        iconAnchor: [18, 47],
+        popupAnchor:[0, -50]
+      });
+    }
+
+    /* ── SELECCIONAR PUNTO ── */
+    function selectPunto(idx) {
+      if (activeIdx !== -1) {
+        markers[activeIdx].setIcon(makePin(activeIdx, false));
+        var prev = document.querySelector('.mapa-punto-btn[data-idx="' + activeIdx + '"]');
+        if (prev) prev.classList.remove('active');
+      }
+      if (rutaActiva) cancelarRuta();
+
+      activeIdx = idx;
+      markers[idx].setIcon(makePin(idx, true));
+      map.panTo([PUNTOS[idx].lat, PUNTOS[idx].lng], { animate: true, duration: 0.4 });
+
+      var btnCard = document.querySelector('.mapa-punto-btn[data-idx="' + idx + '"]');
+      if (btnCard) btnCard.classList.add('active');
+
+      var p = PUNTOS[idx];
+      document.getElementById('mapa-panel-empty').style.display = 'none';
+      setText('mapa-panel-num',     p.num);
+      setText('mapa-panel-title',   p.nombre);
+      setText('mapa-panel-address', p.address);
+      setText('mapa-panel-desc',    p.desc);
+      setText('mapa-panel-horario', p.horario);
+      setText('mapa-panel-cat',     p.categoria);
+      setText('mapa-panel-howto',   p.howToGet);
+
+      var gmBtn = document.getElementById('mapa-btn-gmaps');
+      if (gmBtn) gmBtn.href = 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng;
+
+      document.getElementById('mapa-panel-content').classList.add('visible');
+    }
+
+    /* ── ENRUTAMIENTO ── */
+    function resetBtnRuta(label) {
+      var b = document.getElementById('mapa-btn-ruta');
+      if (!b) return;
+      b.disabled = false;
+      b.classList.remove('calculando');
+      b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"'
+        + ' stroke-linecap="round" stroke-linejoin="round" width="15" height="15">'
+        + '<circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 15 14"/></svg> ' + label;
+    }
+
+    function cancelarRuta() {
+      if (rutaLine)  { map.removeLayer(rutaLine);  rutaLine  = null; }
+      if (userDot)   { map.removeLayer(userDot);   userDot   = null; }
+      rutaActiva = false;
+      var info = document.getElementById('mapa-ruta-info');
+      if (info) info.classList.remove('visible');
+      resetBtnRuta('Cómo llegar');
+    }
+
+    function trazarRuta(destLat, destLng) {
+      if (!navigator.geolocation) { alert('Tu navegador no soporta geolocalización.'); return; }
+      var b = document.getElementById('mapa-btn-ruta');
+      if (b) { b.disabled = true; b.classList.add('calculando'); b.textContent = 'Calculando...'; }
+
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          var uLat = pos.coords.latitude;
+          var uLng = pos.coords.longitude;
+
+          if (userDot) map.removeLayer(userDot);
+          userDot = L.circleMarker([uLat, uLng], {
+            radius: 9, fillColor: '#E0136C', color: '#fff', weight: 2.5, fillOpacity: 1
+          }).addTo(map);
+
+          var gUrl = 'https://www.google.com/maps/dir/?api=1&origin=' + uLat + ',' + uLng
+                   + '&destination=' + destLat + ',' + destLng + '&travelmode=driving';
+          var gmBtn = document.getElementById('mapa-btn-gmaps');
+          if (gmBtn) gmBtn.href = gUrl;
+
+          var osrmUrl = 'https://router.project-osrm.org/route/v1/driving/'
+            + uLng + ',' + uLat + ';' + destLng + ',' + destLat
+            + '?overview=full&geometries=geojson&steps=false';
+
+          fetch(osrmUrl)
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              if (!data.routes || !data.routes[0]) throw new Error('no route');
+              var route   = data.routes[0];
+              var distKm  = (route.distance / 1000).toFixed(1);
+              var mins    = Math.ceil(route.duration / 60);
+              var timeStr = mins >= 60
+                ? (Math.floor(mins / 60) + 'h ' + (mins % 60) + 'min')
+                : (mins + ' min');
+              var coords  = route.geometry.coordinates.map(function (c) { return [c[1], c[0]]; });
+
+              if (rutaLine) map.removeLayer(rutaLine);
+              rutaLine = L.polyline(coords, {
+                color: '#E0136C', weight: 4, opacity: 0.85,
+                lineCap: 'round', lineJoin: 'round'
+              }).addTo(map);
+
+              map.fitBounds(rutaLine.getBounds(), { padding: [40, 40] });
+
+              setText('mapa-ruta-dist', distKm + ' km');
+              setText('mapa-ruta-time', timeStr);
+              var info = document.getElementById('mapa-ruta-info');
+              if (info) info.classList.add('visible');
+
+              rutaActiva = true;
+              resetBtnRuta('Recalcular ruta');
+            })
+            .catch(function () {
+              window.open(gUrl, '_blank');
+              cancelarRuta();
+            });
+        },
+        function () {
+          resetBtnRuta('Cómo llegar');
+          alert('No fue posible obtener tu ubicación. Verifica los permisos del navegador.');
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
+
+    /* ── MARCADORES ── */
+    PUNTOS.forEach(function (p, i) {
+      var m = L.marker([p.lat, p.lng], { icon: makePin(i, false) }).addTo(map);
+      m.on('click', function () { selectPunto(i); });
+      markers.push(m);
+    });
+
+    /* ── EVENTOS ── */
+    document.getElementById('mapa-puntos').addEventListener('click', function (e) {
+      var btn = e.target.closest('.mapa-punto-btn');
+      if (btn) selectPunto(parseInt(btn.getAttribute('data-idx'), 10));
+    });
+
+    document.getElementById('mapa-btn-ruta').addEventListener('click', function () {
+      if (activeIdx !== -1) trazarRuta(PUNTOS[activeIdx].lat, PUNTOS[activeIdx].lng);
+    });
+
+    document.getElementById('mapa-btn-cancelar').addEventListener('click', cancelarRuta);
+
+    var locBtn = document.getElementById('mapa-mi-ubicacion');
+    if (locBtn) {
+      if (navigator.geolocation) {
+        locBtn.addEventListener('click', function () {
+          locBtn.textContent = 'Localizando...';
+          navigator.geolocation.getCurrentPosition(
+            function (pos) {
+              map.setView([pos.coords.latitude, pos.coords.longitude], 15, { animate: true });
+              locBtn.textContent = 'Mi ubicación';
+            },
+            function () { locBtn.textContent = 'Mi ubicación'; }
+          );
+        });
+      } else {
+        locBtn.style.display = 'none';
+      }
+    }
+
+    /* ── INICIO ── */
+    setTimeout(function () {
+      map.invalidateSize();
+      selectPunto(0);
+    }, 400);
+
+  })();
+  </script>
+</body>
+
+</html>

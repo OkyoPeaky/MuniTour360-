@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merch Cosoleacaque — Lleva el municipio contigo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles2.css">
+  <link rel="stylesheet" href="merch.css">
+</head>
+<body>
+  <nav style="position:sticky;top:0;z-index:100;">
+    <a href="munitour360.html"><i class="nav-icon icon-inicio"></i> Inicio</a>
+    <a href="#ropa"><i class="nav-icon icon-ropa"></i> Ropa</a>
+    <a href="#accesorios"><i class="nav-icon icon-accesorios"></i> Accesorios</a>
+    <a href="#recuerdos"><i class="nav-icon icon-recuerdos"></i> Recuerdos</a>
+    <a href="artesanos.html"><i class="nav-icon icon-artesanos"></i> Artesanos</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="parallax-banner" style="background-image:url('Rueda.png'); height:460px;">
+    <div class="parallax-banner-content">
+      <span class="parallax-label">✦ Merch Oficial · Cosoleacaque ✦</span>
+      <h3>Lleva el municipio<br><em>contigo</em></h3>
+      <p>Productos con identidad. Diseñados en Cosoleacaque, para el mundo.</p>
+    </div>
+  </div>
+  <div class="textile-band"></div>
+
+  <!-- INTRO -->
+  <section class="reveal" style="padding:3.5rem 2rem 1rem; max-width:780px; margin:0 auto; text-align:center;">
+    <p class="section-label"><i class="section-icon icon-merch"></i> Hecho aquí, pensado para ti</p>
+    <h2 class="section-title">Merch <em>Cosoleacaque</em></h2>
+    <p style="color:var(--text); margin-bottom:1rem;">
+      Cada artículo del merch de Cosoleacaque fue diseñado con la paleta, los símbolos y las tradiciones
+      del municipio. No es souvenirs genérico: es identidad local en forma de objeto.
+      Compra, úsalo y cuéntale al mundo de dónde eres.
+    </p>
+  </section>
+
+  <!-- ROPA -->
+  <section id="ropa" class="reveal" style="padding:2rem 2rem 3rem; max-width:1100px; margin:0 auto;">
+    <p class="section-label"><i class="section-icon icon-ropa"></i> Ropa</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">Viste <em>el municipio</em></h2>
+    <div class="merch-grid">
+
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#3B1060,#E0136C);">
+          <span class="merch-img-icon"><i class="content-icon icon-playera-cozol"></i></span>
+          <div class="merch-badge">Más vendido</div>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Playera "Cozolteacaque"</div>
+          <div class="merch-desc">Diseño tipográfico con el nombre náhuatl del municipio. Algodón 100%,
+            corte unisex, disponible en negro, magenta y hueso.</div>
+          <div class="merch-sizes">S · M · L · XL · XXL</div>
+          <div class="merch-price">$320 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Playera Cozolteacaque', 320)">+ Añadir</button>
+        </div>
+      </div>
+
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#1A0A2E,#6B65A0);">
+          <span class="merch-img-icon"><i class="content-icon icon-gorra"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Gorra "Sur de Veracruz"</div>
+          <div class="merch-desc">Gorra estilo papá con bordado del escudo y la leyenda "Cosoleacaque, Ver."
+            Color: negro con ribete magenta.</div>
+          <div class="merch-price">$280 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Gorra Sur de Veracruz', 280)">+ Añadir</button>
+        </div>
+      </div>
+
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#B50F57,#3B1060);">
+          <span class="merch-img-icon"><i class="content-icon icon-hoodie"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Hoodie "Región Olmeca"</div>
+          <div class="merch-desc">Sudadera con capucha y diseño de palma coyul bordada en el pecho.
+            Algodón-poliéster, tela gruesa. Ideal para las noches frescas del municipio.</div>
+          <div class="merch-sizes">S · M · L · XL</div>
+          <div class="merch-price">$580 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Hoodie Región Olmeca', 580)">+ Añadir</button>
+        </div>
+      </div>
+
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#6B65A0,#E0136C);">
+          <span class="merch-img-icon"><i class="content-icon icon-playera-popo"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Playera "El Popo"</div>
+          <div class="merch-desc">Diseño ilustrado con la bebida tradicional del municipio. Edición limitada
+            con tipografía artesanal. Algodón combed 100%.</div>
+          <div class="merch-sizes">S · M · L · XL</div>
+          <div class="merch-price">$340 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Playera El Popo', 340)">+ Añadir</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESORIOS -->
+  <section id="accesorios" class="reveal" style="padding:2rem 2rem 3rem; max-width:1100px; margin:0 auto;">
+    <p class="section-label"><i class="section-icon icon-accesorios"></i> Accesorios</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">Detalles que <em>identifican</em></h2>
+    <div class="merch-grid">
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#2d1b00,#b87333);">
+          <span class="merch-img-icon"><i class="content-icon icon-taza"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Taza "Cosoleacaque"</div>
+          <div class="merch-desc">Cerámica blanca con diseño tipográfico del municipio. Ideal para el café
+            o el popo de cada mañana. Apta para lavavajillas.</div>
+          <div class="merch-price">$190 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Taza Cosoleacaque', 190)">+ Añadir</button>
+        </div>
+      </div>
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#1A0A2E,#E0136C);">
+          <span class="merch-img-icon"><i class="content-icon icon-tote-bag"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Tote Bag "Coyul"</div>
+          <div class="merch-desc">Bolsa de tela con ilustración de palma coyul y el nombre náhuatl del
+            municipio. Algodón natural. Manija larga.</div>
+          <div class="merch-price">$160 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Tote Bag Coyul', 160)">+ Añadir</button>
+        </div>
+      </div>
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#3B1060,#9B96C4);">
+          <span class="merch-img-icon"><i class="content-icon icon-pin"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Pin Esmaltado "Jarana"</div>
+          <div class="merch-desc">Pin metálico con esmalte de colores del instrumento jarocho. Cierre de
+            mariposa. Edición de colección.</div>
+          <div class="merch-price">$75 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Pin Jarana', 75)">+ Añadir</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECUERDOS -->
+  <section id="recuerdos" class="reveal" style="padding:2rem 2rem 4rem; max-width:1100px; margin:0 auto;">
+    <p class="section-label"><i class="section-icon icon-recuerdos"></i> Recuerdos</p>
+    <h2 class="section-title" style="margin-bottom:2rem;">Memorias de <em>Cosoleacaque</em></h2>
+    <div class="merch-grid">
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#1A0A2E,#B50F57);">
+          <span class="merch-img-icon"><i class="content-icon icon-poster"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Póster "Cosoleacaque 1561"</div>
+          <div class="merch-desc">Ilustración artística del municipio con tipografía vintage. Impresión
+            de alta calidad en papel mate. Formato 30×45 cm.</div>
+          <div class="merch-price">$220 MXN</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Póster Cosoleacaque', 220)">+ Añadir</button>
+        </div>
+      </div>
+      <div class="merch-card wow-card">
+        <div class="merch-img" style="background:linear-gradient(135deg,#3B1060,#E0136C);">
+          <span class="merch-img-icon"><i class="content-icon icon-postales"></i></span>
+        </div>
+        <div class="merch-body">
+          <div class="merch-name">Set de Postales Culturales</div>
+          <div class="merch-desc">6 postales ilustradas con imágenes del parque, la iglesia, el mercado,
+            la rueda de la fortuna, el popo y la jarana. Set con sobre de tela.</div>
+          <div class="merch-price">$120 MXN el set</div>
+          <button class="merch-btn" onclick="addToCart(this, 'Set Postales', 120)">+ Añadir</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRITO FLOTANTE -->
+  <div id="merch-cart" class="merch-cart-float" style="display:none;">
+    <div class="cart-header">
+      <span>Tu canasta</span>
+      <button onclick="toggleCart()" style="background:none;border:none;color:white;font-size:1.2rem;cursor:pointer;">✕</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-total">
+      Total: <strong id="cart-total-val">$0 MXN</strong>
+    </div>
+    <button class="merch-checkout-btn">Solicitar pedido por WhatsApp</button>
+  </div>
+  <button id="cart-toggle" class="cart-fab" onclick="toggleCart()"><span id="cart-count">0</span></button>
+
+  <div class="textile-band"></div>
+  <footer>
+    <p>✦ COSOLEACAQUE · VERACRUZ · MÉXICO ✦</p>
+    <p style="margin-top:.5rem;">Merch · Cultura · Identidad</p>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .wow-card').forEach(el => io.observe(el));
+
+    // Cart logic
+    let cart = [];
+    function addToCart(btn, name, price) {
+      const existing = cart.find(i => i.name === name);
+      if (existing) { existing.qty++; }
+      else { cart.push({ name, price, qty: 1 }); }
+      renderCart();
+      btn.textContent = '✓ Añadido';
+      btn.style.background = 'var(--jade)';
+      setTimeout(() => { btn.textContent = '+ Añadir'; btn.style.background = ''; }, 1800);
+    }
+    function renderCart() {
+      const list = document.getElementById('cart-items');
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      list.innerHTML = cart.map(i =>
+        `<div class="cart-item"><span>${i.name} ×${i.qty}</span><span>$${i.price * i.qty}</span></div>`
+      ).join('');
+      document.getElementById('cart-total-val').textContent = `$${total} MXN`;
+      document.getElementById('cart-count').textContent = cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('merch-cart').style.display = cart.length ? 'flex' : 'none';
+    }
+    function toggleCart() {
+      const c = document.getElementById('merch-cart');
+      c.style.display = c.style.display === 'none' ? 'flex' : 'none';
+    }
+  </script>
+</body>
+</html>
