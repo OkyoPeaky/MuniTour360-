@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Proyectosk\\\\proyecto_fixed\" -Recurse -Force | Select-Object FullName, @{Name=\"Size\";Expression={if\\($_.PSIsContainer\\){\"DIR\"}else{\"{0:N0} bytes\" -f $_.Length}}} | Sort-Object FullName)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Proyectosk\\\\proyecto_fixed\" -Recurse | ForEach-Object { if \\($_.PSIsContainer\\) { \"{0},DIR\" -f $_.FullName } else { \"{0},{1}\" -f $_.FullName, $_.Length } })"
+    ]
+  }
+}
