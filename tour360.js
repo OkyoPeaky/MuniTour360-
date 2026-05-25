@@ -6,6 +6,22 @@
 //
 // ════════════════════════════════════════════════════════
 
+// Stub global de debug (se sobrescribe si se activa el debug VR)
+window.logVR = window.logVR || function() {};
+
+// Captura de errores globales para diagnosticar pantallas en blanco
+window.addEventListener('error', (e) => {
+  console.error('[ERROR GLOBAL]', e.message, 'en', e.filename, 'línea', e.lineno);
+  // Mostrar error en pantalla si la UI está en blanco
+  const boot = document.getElementById('boot');
+  if (boot && !boot.classList.contains('gone')) {
+    const errBox = document.createElement('div');
+    errBox.style.cssText = 'position:fixed;bottom:20px;left:20px;right:20px;background:#400;color:#fff;padding:1rem;font-family:monospace;font-size:.8rem;z-index:99999;border-radius:4px';
+    errBox.textContent = `Error: ${e.message} (línea ${e.lineno})`;
+    document.body.appendChild(errBox);
+  }
+});
+
 
 // ════════════════════════════════════════════════════════
 //  CONFIGURACIÓN DE TOURS
