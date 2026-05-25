@@ -701,13 +701,40 @@ function actualizarIconoPlayPause(reproduciendo) {
 
 function togglePlayPause() {
   const videoEl = document.querySelector('#vid-rueda');
-  if (!videoEl) return;
-  if (videoEl.paused) {
-    videoEl.play();
-    actualizarIconoPlayPause(true);
-    toast('▶ Reproduciendo', 1500);
+  if (!videoEl) {
+    console.warn('[Video] Elemento no encontrado');
+    return;
+  }
+
+  console.log('[Video] Estado actual: paused=', videoEl.paused, ', currentTime=', videoEl.currentTime, ', readyState=', videoEl.readyState);
+
+  // Si está pausado o no se ha iniciado, reproducir
+  if (videoEl.paused || videoEl.ended) {
+    const playPromise = videoEl.play();
+    if (playPromise && playPromise.then) {
+      playPromise.then(() => {
+        console.log('[Video] Reproduciendo OK');
+        actualizarIconoPlayPause(true);
+        toast('▶ Reproduciendo', 1500);
+      }).catch(err => {
+        console.warn('[Video] Play falló, intentando muted:', err);
+        videoEl.muted = true;
+        videoEl.play().then(() => {
+          actualizarIconoPlayPause(true);
+          toast('▶ Reproduciendo (sin audio)', 1500);
+        }).catch(e => {
+          console.error('[Video] No se pudo reproducir:', e);
+          toast('Error al reproducir', 2000);
+        });
+      });
+    } else {
+      actualizarIconoPlayPause(true);
+      toast('▶ Reproduciendo', 1500);
+    }
   } else {
+    // Está reproduciendo, pausar
     videoEl.pause();
+    console.log('[Video] Pausado');
     actualizarIconoPlayPause(false);
     toast('⏸ Pausa', 1500);
   }
@@ -733,8 +760,19 @@ function initControlesVideo() {
   function aplicarHandlers(botonEl, accion) {
     if (!botonEl) return;
 
+    let ultimaActivacion = 0;
     const onAccion = (evt) => {
+      // Debounce: ignorar si se llamó hace menos de 300ms
+      const ahora = Date.now();
+      if (ahora - ultimaActivacion < 300) {
+        console.log('[VideoBtn] Ignorado (debounce):', evt.type);
+        return;
+      }
+      ultimaActivacion = ahora;
+
       console.log('[VideoBtn] Activado:', evt.type);
+      // Evitar que el evento se propague y se ejecute dos veces
+      if (evt.stopPropagation) evt.stopPropagation();
       accion();
     };
     const onIn = () => {
