@@ -984,9 +984,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const panel = document.getElementById('tilt-panel');
     if (panel) panel.style.display = 'block';
   });
-
-  // Inicializar panel de ajuste de inclinación
-  initTiltPanel();
 });
 
 
