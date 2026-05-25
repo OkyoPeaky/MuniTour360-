@@ -120,23 +120,24 @@ AFRAME.registerComponent('hotspot-nav', {
     const colorInterior  = esVideo ? '#E0136C' : '#D4A256';   // contraste opuesto
 
     // ── HITBOX INVISIBLE ──
-    // Cilindro vertical más grande que captura clicks fácilmente,
-    // especialmente desde arriba (mandos VR) o ángulos oblicuos
+    // Un plano grande en el piso, completamente invisible al render
+    // pero detectable por el raycaster. Como es horizontal,
+    // no bloquea visualmente nada (los anillos están encima)
     const hitbox = document.createElement('a-entity');
     hitbox.setAttribute('geometry', {
-      primitive: 'cylinder',
-      radius: 0.65,
-      height: 3.5,
-      segmentsRadial: 16,
-      openEnded: true
+      primitive: 'circle',
+      radius: 0.8,
+      segments: 24
     });
     hitbox.setAttribute('material', {
-      color: '#000000',
-      opacity: 0,
+      shader: 'flat',
       transparent: true,
+      opacity: 0,
+      alphaTest: 0.99,
       side: 'double'
     });
-    hitbox.setAttribute('position', '0 1.5 0');
+    hitbox.setAttribute('rotation', '-90 0 0');
+    hitbox.setAttribute('position', '0 0.01 0');
     hitbox.classList.add('hotspot-hitbox');
     el.appendChild(hitbox);
 
@@ -234,7 +235,7 @@ AFRAME.registerComponent('hotspot-nav', {
         color: '#EAE8F5',
         width: 4,
         font: 'mozillavr',
-        letterSpacing: 4
+        letterSpacing: 2
       });
       labelText.setAttribute('position', '0 0 0.01');
       labelBg.appendChild(labelText);
